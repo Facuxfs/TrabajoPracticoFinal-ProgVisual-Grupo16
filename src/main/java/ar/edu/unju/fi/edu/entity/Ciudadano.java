@@ -34,6 +34,11 @@ public class Ciudadano implements Serializable {
 	@Column(name ="cur_id")
 	private Long id;
 	
+	@NotEmpty
+	@Size(min = 4, max = 20, message = "Ingrese su nombre y apellido")
+	private String nombre;
+
+
 	@Min(value = 1000000, message = "Ingrese un dni valido")
 	private int dni;
 	
@@ -72,7 +77,38 @@ public class Ciudadano implements Serializable {
 
 	
 	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 	
+	
+
+	public Ciudadano(Long id,
+			@NotEmpty @Size(min = 4, max = 20, message = "Ingrese su nombre y apellido") String nombre,
+			@Min(value = 1000000, message = "Ingrese un dni valido") int dni, Boolean estado,
+			@NotEmpty @Email String email, @NotEmpty String estadoCivil, @NotNull String provincia,
+			@Min(value = 100000000, message = "Ingrese un numero telefonico valido") Long telefono,
+			LocalDate fechaNacimineto,
+			@NotNull @Size(min = 4, max = 20, message = "La contraseña debe tener entre 4 a 20 caracteres") String contrasenia,
+			Curriculum cv) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.dni = dni;
+		this.estado = estado;
+		this.email = email;
+		this.estadoCivil = estadoCivil;
+		this.provincia = provincia;
+		this.telefono = telefono;
+		this.fechaNacimineto = fechaNacimineto;
+		this.contrasenia = contrasenia;
+		this.cv = cv;
+	}
+
 
 	public Boolean getEstado() {
 		return estado;
@@ -82,23 +118,7 @@ public class Ciudadano implements Serializable {
 		this.estado = estado;
 	}
 
-	public Ciudadano(Long id, @Min(value = 1000000, message = "Ingrese un dni valido") int dni,
-			@NotEmpty @Email String email, @NotEmpty String estadoCivil, @NotNull String provincia,
-			@Min(value = 100000000, message = "Ingrese un numero telefonico valido") Long telefono,
-			LocalDate fechaNacimineto,
-			@NotNull @Size(min = 4, max = 20, message = "La contraseña debe tener entre 4 a 20 caracteres") String contrasenia,
-			Curriculum cv) {
-		super();
-		this.id = id;
-		this.dni = dni;
-		this.email = email;
-		this.estadoCivil = estadoCivil;
-		this.provincia = provincia;
-		this.telefono = telefono;
-		this.fechaNacimineto = fechaNacimineto;
-		this.contrasenia = contrasenia;
-		this.cv = cv;
-	}
+	
 
 	public int getDni() {
 		return dni;

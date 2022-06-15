@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
+	</head>
+	
+	<body>
+		<header id="header-principal" th:fragment="header">
+			<div class="container-fluid">
+				 <div class=" row page-header" >
+				 	<div class="col-md-8 text-center">
+				 		<h1>Bienvenidos al Portal de Capacitación</h1>
+				 		<h4>Phasellus tempus ultricies purus.</h4>
+				 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam imperdiet, dui non faucibus egestas, ante massa dictum erat, a varius orci libero sed purus. Integer pulvinar lorem velit, non dapibus arcu facilisis vel. Duis et interdum nibh, at rutrum arcu. Donec a mi arcu. Aenean commodo leo sem, eget sodales leo placerat sit amet. Nunc quis tristique nunc. Phasellus tempus ultricies purus, quis aliquet odio condimentum eget. Donec ut tellus nunc. Maecenas et tempor elit. Sed pellentesque metus ac condimentum condimentum. Pellentesque consectetur mauris a velit facilisis sollicitudin vel a nunc. Proin quis mollis diam, et tincidunt eros. In pretium dignissim dui. Nulla libero sem, ultrices eu ullamcorper eu, vulputate nec mi.</p>
+				 	</div>
+				  	<div class="col-md-4">
+					   <img id="logo" src="/images/persona.jpg" alt="imagen presentación" title="Capacitación personalizada"/>
+					</div>
+				</div>
+				<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+				  <div class="container-fluid">
+				    <a class="navbar-brand" th:href="@{/inicio}">Inicio</a>
+				    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				      <span class="navbar-toggler-icon"></span>
+				    </button>
+				    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+				      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				        <li class="nav-item">
+				          <a class="nav-link active" aria-current="page" th:href="@{/agenda}">Agenda</a>
+				        </li>
+				        <li class="nav-item">
+				          <a class="nav-link active" th:href="@{/beneficio/becas}">Beneficios y Becas</a>
+				        </li>
+				        <li class="nav-item">
+				          <a class="nav-link active" aria-current="page" th:href="@{/contacto}">Contáctanos</a>
+				        </li>
+				        <li class="nav-item dropdown">
+				          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				            Datos
+				          </a>
+				          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+				            <li><a class="dropdown-item" th:href="@{/docente/listaDocentes}">Docentes</a></li>
+				            <li><a class="dropdown-item" th:href="@{/alumno/listaAlumnos}">Alumnos</a></li>
+				            <li><hr class="dropdown-divider"></li>
+				            <li><a class="dropdown-item" th:href="@{/beneficio/listaBecas}">Becas</a></li>
+				            <li><a class="dropdown-item" th:href="@{/curso/listaCursos}">Cursos</a></li>
+				          </ul>
+				        </li>
+				        <!-- <li class="nav-item">
+				          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+				        </li> -->
+				      </ul>
+				      <form class="d-flex">
+				        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+				        <button class="btn btn-outline-success" type="submit">Search</button>
+				      </form>
+				    </div>
+  </div>
+</nav>
+			</div> 
+		</header>
+		
+		<script th:href="@{/webjars/jquery/jquery.min.js}" type="text/javascript"></script>
+		<script th:href="@{/webjars/popper.js/umd/popper.min.js}" type="text/javascript"></script>
+		<script th:href="@{/webjars/bootstrap/js/bootstrap.min.js}" type="text/javascript"></script>
+	</body>
+</html>
