@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Alta Docente</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	</head>
+	
+	<body>
+		<header th:replace="/layouts/header :: header"></header>
+		<div class="container col-4">
+			<br>
+			<p class="h4">Registrate AQUI</p>
+			<br>
+	
+			<form th:action="@{/ciudadano/guardar}" method="POST" th:object="${ciudadano}">
+			
+				<div class="mb-3">
+					<label for="dniId" class="form-label">dni</label> 
+					<input th:field=*{dni} type="number" class="form-control" id="dniId" placeholder="Ingrese su dni">
+				</div>
+				<div class="mb-3">
+					<label for="nombresId" class="form-label">Nombres</label> 
+					<input th:field=*{nombre} type="text" class="form-control" id="nombresId" placeholder="Ingrese nombres">
+				</div>
+				<div class="mb-3">
+					<label for="emailId" class="form-label">E-mail</label> 
+					<input th:field=*{email} type="email" class="form-control" id="emailId" placeholder="Ingrese e-mail">
+				</div>
+	
+				<div class="form-group row">
+					<label for="fecha" class="col-lg-3 col-form-label form-control-label">Fecha de Nacimiento</label>
+					<div class="col-lg-9 input-group date" id="datetimepicker1" data-target-input="nearest">
+					<input type="date" class="form-control datatimepicker-input" data-target="#datetimepicker1"
+							id="fecha" placeholder="fecha" th:field="${ciudadano.fechaNacimineto}"/>
+					<div class="input-group-append" data-target="#daratimepicker1" data-toggle="datatimepicker"></div>
+					<div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+					</div>
+				</div>
+
+			<div class="form-group row">
+				<label class="col-lg-3 col-form-label form-control-tabel">Estado Civil</label>
+				<div class="col-lg-9">
+					<div class="form-check">
+						<input  type="radio" name="gridRadios"
+							id="gridradios1" th:field="*{estadoCivil}" value="Soltero"
+							checked="checked" >
+							 <label  for="gridRadios1">Soltero</label>
+					</div>
+					<div class="form-check">
+						<input type="radio" name="gridRadios"
+							id="gridradios2" th:field="*{estadoCivil}" value="Casado"
+							checked="checked"> 
+							<label for="gridRadios2">Casado</label>
+					</div>
+					<div class="form-check">
+						<input  type="radio" name="gridRadios"
+							id="gridradios3" th:field="*{estadoCivil}" value="Viudo"
+							checked="checked">
+							 <label 	for="gridRadios3">Viudo</label>
+					</div>
+				</div>
+			</div>
+			
+	
+
+			<div class="mb-3">
+					<label for="provinciasId" class="form-label">Provincia</label> 
+					<input th:field=*{provincia} type="text" class="form-control" id="provinciasId" placeholder="Ingrese provincia">
+				</div>
+				<div class="mb-3">
+					<label for="telefonoId" class="form-label">Teléfono</label> 
+					<input th:field=*{telefono} type="" class="form-control" id="telefonoId" placeholder="Ingrese telefono">
+				</div>
+				<div class="form-control">
+					<label for="telefonoId" class="form-label">Contraseña</label> 
+					<input th:field=*{contrasenia} type="password" class="form-control" id="telefonoId" placeholder="Ingrese su contraseña">
+				</div>
+				
+				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+					<button class="btn btn-primary me-md-2" type="submit">Enviar</button>
+					 <a th:href="@{/inicio}" id="cancel" name="cancel" class="btn btn-secondary">Cancelar</a>
+	  				<!-- <button class="btn btn-secondary" type="reset">Cancelar</button> -->
+				</div>
+			</form>
+		</div>
+		</br></br>
+		<footer th:replace="/layouts/footer :: footer"></footer>
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+	
+	
+	</body>
+</html>
