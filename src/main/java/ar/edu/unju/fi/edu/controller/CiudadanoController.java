@@ -37,6 +37,15 @@ public class CiudadanoController {
 		return mav;
 	}
 	
+	@PostMapping("/editar/{dni}")
+	public ModelAndView editarCiudadano (@ModelAttribute("ciudadano") Ciudadano ciudadano) {
+		ModelAndView  mav = new ModelAndView("redirect:/ciudadano/listaciudadanos");
+		ciudadanoService.guardarCiudadano(ciudadano);
+		mav.addObject("ciudadanos", ciudadanoService.getListaCiudadano());
+		return mav;
+	}
+	
+	
 	@GetMapping("/listaciudadanos")
 		public ModelAndView mostrarLista() {
 		ModelAndView mav = new ModelAndView("lista_ciudadanos");
@@ -44,10 +53,13 @@ public class CiudadanoController {
 		return mav;
 	}
 	
+	
+	
 	@GetMapping("/vistaciudadano/{dni}")
 	public ModelAndView mostrarMenuCiudadano(@PathVariable(value="dni")int dni) {
 		ModelAndView mav = new ModelAndView("vista_ciudadano");
 		mav.addObject("curriculum", new Curriculum());
+		mav.addObject("ciudadano",ciudadanoService.buscarCiudadano(dni));
 		return mav;
 	}
 	
