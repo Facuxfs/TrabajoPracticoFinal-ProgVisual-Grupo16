@@ -5,11 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.edu.entity.Ciudadano;
+import ar.edu.unju.fi.edu.entity.Curriculum;
 import ar.edu.unju.fi.edu.service.ICiudadanoService;
 
 @Controller
@@ -42,5 +44,13 @@ public class CiudadanoController {
 		return mav;
 	}
 	
-
+	@GetMapping("/vistaciudadano/{dni}")
+	public ModelAndView mostrarMenuCiudadano(@PathVariable(value="dni")int dni) {
+		ModelAndView mav = new ModelAndView("vista_ciudadano");
+		mav.addObject("curriculum", new Curriculum());
+		return mav;
+	}
+	
+	
+	
 }
