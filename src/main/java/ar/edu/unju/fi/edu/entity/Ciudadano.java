@@ -42,7 +42,7 @@ public class Ciudadano implements Serializable {
 	@Min(value = 1000000, message = "Ingrese un dni valido")
 	private int dni;
 	
-	@Column(name = "Ciud_estado")
+	@Column(name = "estado")
 	private Boolean estado;
 
 	@NotEmpty

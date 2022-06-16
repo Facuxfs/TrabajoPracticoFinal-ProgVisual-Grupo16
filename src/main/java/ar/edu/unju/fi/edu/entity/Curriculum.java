@@ -42,9 +42,28 @@ public class Curriculum implements Serializable{
 	@NotEmpty
 	@Column(name="datos_of")
 	private String datosOficiales;
+	
+	@Column(name = "estado")
+	private Boolean estado;
 
+	public Boolean getEstado() {
+		return estado;
+	}
+
+
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
+
+
+
+
+	
+	
 	public Curriculum(Long id, @NotEmpty String experienciaLaboral, @NotEmpty String educacion,
-			@NotEmpty String idiomas, @NotEmpty String conocimientosInformaticos, @NotEmpty String datosOficiales) {
+			@NotEmpty String idiomas, @NotEmpty String conocimientosInformaticos, @NotEmpty String datosOficiales,
+			Boolean estado) {
 		super();
 		this.id = id;
 		this.experienciaLaboral = experienciaLaboral;
@@ -52,7 +71,17 @@ public class Curriculum implements Serializable{
 		this.idiomas = idiomas;
 		this.conocimientosInformaticos = conocimientosInformaticos;
 		this.datosOficiales = datosOficiales;
+		this.estado = estado;
 	}
+
+
+
+	public Curriculum() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 
 	public Long getId() {
 		return id;

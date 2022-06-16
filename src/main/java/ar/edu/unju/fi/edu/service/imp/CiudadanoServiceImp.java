@@ -43,7 +43,7 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 		ciudadano.setEstado(false);
 		ciudadanoRepository.save(ciudadano);
 	}
-
+	
 	@Override
 	public List<Ciudadano> getListaCiudadano() {
 		return ciudadanoRepository.findByEstado(true);
