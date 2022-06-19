@@ -14,14 +14,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
 
-import ar.edu.unju.fi.edu.entity.Empleador;
-
 @Entity
 @Table(name = "oferta_laboral")
 public class OfertaLaboral implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
-	
+
+	private static final long serialVersionUID = -3933069521430583169L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ol_id")
@@ -47,7 +45,7 @@ public class OfertaLaboral implements Serializable{
 	@NotEmpty(message = "El campo no puede estar vacio")
 	@Positive(message = "El numero de jornada debe ser positivo")
 	@Column(name = "ol_jornada")
-	private int jornada;
+	private String jornada;
 	
 	@NotEmpty(message = "El campo no puede estar vacio")
 	@Column(name = "ol_requisitos")
@@ -84,7 +82,7 @@ public class OfertaLaboral implements Serializable{
 			@NotEmpty(message = "El campo no puede estar vacio") String puesto_req,
 			@NotEmpty(message = "El campo no puede estar vacio") String disp_horaria,
 			@NotEmpty(message = "El campo no puede estar vacio") String tareas_princiaples,
-			@NotEmpty(message = "El campo no puede estar vacio") @Positive(message = "El numero de jornada debe ser positivo") int jornada,
+			@NotEmpty(message = "El campo no puede estar vacio") @Positive(message = "El numero de jornada debe ser positivo") String jornada,
 			@NotEmpty(message = "El campo no puede estar vacio") String requisitos,
 			@NotEmpty(message = "El campo no puede estar vacio") @Positive(message = "El salario debe ser positivo") Double salario,
 			@NotEmpty(message = "El campo no puede estar vacio") String beneficios, boolean disponible) {
@@ -143,11 +141,11 @@ public class OfertaLaboral implements Serializable{
 		this.tareas_princiaples = tareas_princiaples;
 	}
 
-	public int getJornada() {
+	public String getJornada() {
 		return jornada;
 	}
 
-	public void setJornada(int jornada) {
+	public void setJornada(String jornada) {
 		this.jornada = jornada;
 	}
 

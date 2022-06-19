@@ -23,8 +23,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "empleador")
 public class Empleador implements Serializable{
 	
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -6326069709113079285L;
+
 	@NotEmpty(message = "El campo no puede estar vacio")
 	@Positive(message = "El numero de cuit debe ser positivo")
 	@Id
