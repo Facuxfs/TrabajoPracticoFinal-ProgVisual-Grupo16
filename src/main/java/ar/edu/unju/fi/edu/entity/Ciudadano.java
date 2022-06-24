@@ -1,13 +1,13 @@
 package ar.edu.unju.fi.edu.entity;
 
 import java.io.Serializable;
+
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -29,17 +29,14 @@ public class Ciudadano implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name ="cur_id")
-	private Long id;
 	
 	@NotEmpty
 	@Size(min = 4, max = 20, message = "Ingrese su nombre y apellido")
 	private String nombre;
 
-
+	@Id
 	@Min(value = 1000000, message = "Ingrese un dni valido")
+	@Column(name = "ciudadano_dni")
 	private int dni;
 	
 	@Column(name = "estado")
@@ -57,7 +54,7 @@ public class Ciudadano implements Serializable {
 	@Column(name = "prov")
 	private String provincia;
 	
-	@Min(value = 100000000, message = "Ingrese un numero telefonico valido")
+	@Min(value = 1000, message = "Ingrese un numero telefonico valido")
 	@Column
 	private Long telefono;
 	
@@ -70,8 +67,7 @@ public class Ciudadano implements Serializable {
 	@Column(name = "contra")
 	private String contrasenia;
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cur_id")
+	@OneToOne(mappedBy = "ciudadano",fetch = FetchType.LAZY)
 	private Curriculum cv;
 
 
@@ -96,7 +92,7 @@ public class Ciudadano implements Serializable {
 			@NotNull @Size(min = 4, max = 20, message = "La contraseña debe tener entre 4 a 20 caracteres") String contrasenia,
 			Curriculum cv) {
 		super();
-		this.id = id;
+	
 		this.nombre = nombre;
 		this.dni = dni;
 		this.estado = estado;
@@ -134,13 +130,7 @@ public class Ciudadano implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getEmail() {
 		return email;
@@ -204,7 +194,7 @@ public class Ciudadano implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Ciudadano [id=" + id + ", email=" + email + ", estadoCivil=" + estadoCivil + ", provincia=" + provincia
+		return "Ciudadano [ email=" + email + ", estadoCivil=" + estadoCivil + ", provincia=" + provincia
 				+ ", telefono=" + telefono + ", fechaNacimineto=" + fechaNacimineto + ", contrasenia=" + contrasenia
 				+ ", cv=" + cv + "]";
 	} 

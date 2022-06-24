@@ -2,11 +2,15 @@ package ar.edu.unju.fi.edu.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -50,20 +54,32 @@ public class Curriculum implements Serializable{
 		return estado;
 	}
 
-
-
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
 	}
 
-
+	
+	@OneToOne(cascade = {CascadeType.ALL})
+	@JoinColumn(name = "ciudadano_dni")
+	private Ciudadano ciudadano;
 
 
 	
 	
+	public Ciudadano getCiudadano() {
+		return ciudadano;
+	}
+
+	public void setCiudadano(Ciudadano ciudadano) {
+		this.ciudadano = ciudadano;
+	}
+
+	
+
+
 	public Curriculum(Long id, @NotEmpty String experienciaLaboral, @NotEmpty String educacion,
 			@NotEmpty String idiomas, @NotEmpty String conocimientosInformaticos, @NotEmpty String datosOficiales,
-			Boolean estado) {
+			Boolean estado, Ciudadano ciudadano) {
 		super();
 		this.id = id;
 		this.experienciaLaboral = experienciaLaboral;
@@ -72,9 +88,8 @@ public class Curriculum implements Serializable{
 		this.conocimientosInformaticos = conocimientosInformaticos;
 		this.datosOficiales = datosOficiales;
 		this.estado = estado;
+		this.ciudadano = ciudadano;
 	}
-
-
 
 	public Curriculum() {
 		super();
