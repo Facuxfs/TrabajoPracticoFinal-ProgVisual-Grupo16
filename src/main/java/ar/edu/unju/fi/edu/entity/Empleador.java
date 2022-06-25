@@ -25,14 +25,14 @@ public class Empleador implements Serializable{
 	
 	private static final long serialVersionUID = -6326069709113079285L;
 
-	@NotEmpty(message = "El campo no puede estar vacio")
 	@Positive(message = "El numero de cuit debe ser positivo")
+	@Min(value = 1000, message = "El N° de Cuit debe contener como minimo 4 caracteres")
 	@Id
 	@Column(name = "e_cuit")
 	private long cuit;
 	
 	@NotEmpty(message = "El campo no puede estar vacio")
-	@Size(min = 4, max = 20, message = "La contraseña debe estar entre" )
+	@Size(min = 4, max = 20, message = "La contraseña debe estar entre")
 	@Column(name = "e_password")
 	private String contrasenia;
 	
@@ -54,7 +54,6 @@ public class Empleador implements Serializable{
 	@Column(name = "e_email")
 	private String email;
 	
-	@NotEmpty(message = "El campo no puede estar vacio")
 	@Min(value = 100000, message = "El numero de telefono debe contener como minimo 6 digitos")
 	@Positive(message = "El numero de telefono debe ser positivo")
 	@Column(name = "e_tel")
@@ -64,7 +63,6 @@ public class Empleador implements Serializable{
 	@Column(name = "e_domicilio")
 	private String domicilio;
 	
-	@NotEmpty(message = "El campo no puede estar vacio")
 	@Column(name = "e_prov")
 	private String provincia;
 	
@@ -76,6 +74,9 @@ public class Empleador implements Serializable{
 	@Column(name = "e_descripcion")
 	private String descripcion;
 	
+	@Column
+	private boolean estado;
+
 	@OneToMany
 	private List<OfertaLaboral> ofertas = new ArrayList<OfertaLaboral>();
 
@@ -83,21 +84,21 @@ public class Empleador implements Serializable{
 	 * Constructor no parametrizado
 	 */
 	public Empleador() {
-		
+		this.estado = true;
 	}
 	
 	/*
 	 * Constructor parametrizado
 	 */
 	public Empleador(
-			@NotEmpty(message = "El campo no puede estar vacio") @Positive(message = "El numero de cuit debe ser positivo") long cuit,
+			@Positive(message = "El numero de cuit debe ser positivo") @Min(value = 1000, message = "El N° de Cuit debe contener como minimo 4 caracteres") long cuit,
 			@NotEmpty(message = "El campo no puede estar vacio") @Size(min = 4, max = 20, message = "La contraseña debe estar entre") String contrasenia,
 			@NotEmpty(message = "El campo no puede estar vacio") String razon_social, @NotEmpty String nombre_comercial,
 			@PastOrPresent(message = "Ingrese una fecha valida") LocalDate fecha_inicio,
 			@NotEmpty(message = "El campo no puede estar vacio") @Email String email,
-			@NotEmpty(message = "El campo no puede estar vacio") @Min(value = 100000, message = "El numero de telefono debe contener como minimo 6 digitos") @Positive(message = "El numero de telefono debe ser positivo") long telefono,
+			@Min(value = 100000, message = "El numero de telefono debe contener como minimo 6 digitos") @Positive(message = "El numero de telefono debe ser positivo") long telefono,
 			@NotEmpty(message = "El campo no puede estar vacio") String domicilio,
-			@NotEmpty(message = "El campo no puede estar vacio") String provincia,
+			 String provincia,
 			@NotEmpty(message = "El campo no puede estar vacio") String pagina_web,
 			@NotEmpty(message = "El campo no puede estar vacio") String descripcion) {
 		super();
@@ -203,6 +204,14 @@ public class Empleador implements Serializable{
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 
 	@Override
