@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -77,7 +78,7 @@ public class Empleador implements Serializable{
 	@Column
 	private boolean estado;
 
-	@OneToMany
+	@OneToMany(mappedBy = "contacto", cascade = CascadeType.ALL)
 	private List<OfertaLaboral> ofertas = new ArrayList<OfertaLaboral>();
 
 	/*
