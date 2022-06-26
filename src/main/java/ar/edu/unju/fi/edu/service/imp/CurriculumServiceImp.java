@@ -3,7 +3,6 @@ package ar.edu.unju.fi.edu.service.imp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ar.edu.unju.fi.edu.entity.Ciudadano;
 import ar.edu.unju.fi.edu.entity.Curriculum;
 import ar.edu.unju.fi.edu.repository.CurriculumRepository;
 import ar.edu.unju.fi.edu.service.ICurriculumService;
@@ -37,17 +36,20 @@ public class CurriculumServiceImp implements ICurriculumService {
 
 	}
 
+
+
 	@Override
-	public void eliminarCurriculum(int dni) {
-		Curriculum curri = buscarCurriculum(dni);
+	public void eliminarCurriculum(Long id) {
+		// TODO Auto-generated method stub
+		Curriculum curri = buscarCurriculum(id);
 		curri.setEstado(false);
 		curriculumrepository.save(curri);
 	}
 
 	@Override
-	public Curriculum buscarCurriculum(int dni) {
-		
-		return curriculumrepository.findById(dni);
+	public  Curriculum buscarCurriculum(Long id) {
+	
+		return null;
 	}
 
 }

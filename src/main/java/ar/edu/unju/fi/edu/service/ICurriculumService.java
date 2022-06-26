@@ -7,7 +7,7 @@ public interface ICurriculumService {
 	public Curriculum getCurriculum();
 	public boolean guardarCurriculum(Curriculum curriculum);
 	public void modificarCurriculum(Curriculum curriculum);
-	public void eliminarCurriculum(int dni);
-	public Curriculum buscarCurriculum(int dni);
+	public void eliminarCurriculum(Long id);
+	public Curriculum buscarCurriculum(Long id);
 
 }
