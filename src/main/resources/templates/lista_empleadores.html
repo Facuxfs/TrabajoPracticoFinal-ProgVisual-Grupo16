@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Lista Empleadores</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	</head>
+	
+	<body>
+		<header th:replace="/layouts/header :: header"></header>
+		<div class="container">
+			<br>
+			<p class="h4 mb-10">Lista de Empleadores</p>
+			<br>
+			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+			   <a th:href="@{/empleador/nuevo}" id="nuevo" class="btn btn-primary">Nuevo</a>
+			</div>
+			<br>
+			<div class="col-12 d-flex justify-content-center">
+				<table class="table table-striped table-hover">
+						<tr>
+							<th>Cuit</th>
+							<th>Razon Social</th>
+							<th>Nombre Comercial</th>
+							<th>Email</th>							
+							<th>Telefono</th>
+							<th>Domicilio</th>
+							<th>Provincia</th>
+							<th>Pagina Web</th>
+							<th>Descripcion</th>
+							<th>Opciones</th>
+							
+						</tr>	
+						<tr th:each="empleador : ${empleadores}">
+							<td th:text="${empleador.cuit}"></td>
+							<td th:text="${empleador.razon_social}"></td>
+							<td th:text="${empleador.nombre_comercial}"></td>
+							<td th:text="${empleador.email}"></td>
+							<td th:text="${empleador.telefono}"></td>
+							<td th:text="${empleador.domicilio}"></td>
+							<td th:text="${empleador.provincia}"></td>
+							<td th:text="${empleador.pagina_web}"></td>
+							<td th:text="${empleador.descripcion}"></td>
+							<td>
+								<a th:href="@{/empleador/editar/}+${empleador.cuit}" id="editarEmpleador" class="btn btn-warning">Editar</a>
+								<a th:href="@{/empleador/eliminar/}+${empleador.cuit}" id="eliminarCiudadano" class="btn btn-danger">Eliminar</a>
+							</td>
+						</tr>
+					</table>
+				<br><br>
+				
+			</div>
+		
+		</div>
+		<footer th:replace="/layouts/footer :: footer"></footer>
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+	</body>
+</html>

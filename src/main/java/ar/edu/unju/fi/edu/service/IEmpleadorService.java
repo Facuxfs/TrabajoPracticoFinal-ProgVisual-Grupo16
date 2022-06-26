@@ -4,12 +4,13 @@ import java.util.List;
 
 import ar.edu.unju.fi.edu.entity.Empleador;
 
-public interface IEmpleadoService {
+public interface IEmpleadorService {
 
 	public Empleador getEmpleador();
 	public boolean guardarEmpleador(Empleador empleador);
-	public void modificarEmpleador(Empleador empleador);
+	public Empleador modificarEmpleador(Empleador empleador) throws Exception;
+	public void modificarEstado(long e_cuit) throws Exception;
 	public void eliminarEmpleador(long e_cuit);
 	public List<Empleador> getListaEmpleado();
-	public Empleador buscarEmpleador(long e_cuit);
+	public Empleador buscarEmpleador(long e_cuit) throws Exception;
 }
