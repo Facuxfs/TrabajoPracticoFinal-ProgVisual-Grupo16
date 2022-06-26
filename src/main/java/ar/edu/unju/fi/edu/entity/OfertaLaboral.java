@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
 @Entity
 @Table(name = "oferta_laboral")
@@ -25,8 +25,7 @@ public class OfertaLaboral implements Serializable{
 	@Column(name = "ol_id")
 	private long id;
 	
-	@NotEmpty(message = "El campo no puede estar vacio")
-	@Positive(message = "El numero de cuit debe ser positivo")
+	@PositiveOrZero(message = "La cantidad de vacantes debe ser positiva")
 	@Column(name = "ol_nvacantes")
 	private int cant_vacantes;
 	
@@ -40,10 +39,9 @@ public class OfertaLaboral implements Serializable{
 	
 	@NotEmpty(message = "El campo no puede estar vacio")
 	@Column(name = "ol_tareas")
-	private String tareas_princiaples;
+	private String tareas_p;
 	
 	@NotEmpty(message = "El campo no puede estar vacio")
-	@Positive(message = "El numero de jornada debe ser positivo")
 	@Column(name = "ol_jornada")
 	private String jornada;
 	
@@ -51,8 +49,7 @@ public class OfertaLaboral implements Serializable{
 	@Column(name = "ol_requisitos")
 	private String requisitos;
 	
-	@NotEmpty(message = "El campo no puede estar vacio")
-	@Positive(message = "El salario debe ser positivo")
+	@PositiveOrZero(message = "El salario debe ser positivo")
 	@Column(name = "ol_salario")
 	private Double salario;
 	
@@ -65,37 +62,46 @@ public class OfertaLaboral implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "e_cuit")
-	private Empleador contacto;
-	
+	private Empleador contacto;	
+
 	/*
 	 * Constructor no parametrizado
 	 */
 	public OfertaLaboral() {
-		
+		this.disponible = true;
+	}
+	
+	/*
+	 * Constructor con parametro Empleador
+	 */
+	public OfertaLaboral(Empleador contacto) {
+		this.disponible = true;
+		this.contacto = contacto;
 	}
 	
 	/*
 	 * Constructor parametrizado
 	 */
 	public OfertaLaboral(
-			@NotEmpty(message = "El campo no puede estar vacio") @Positive(message = "El numero de cuit debe ser positivo") int cant_vacantes,
+			@PositiveOrZero(message = "El numero de cuit debe ser positivo") int cant_vacantes,
 			@NotEmpty(message = "El campo no puede estar vacio") String puesto_req,
 			@NotEmpty(message = "El campo no puede estar vacio") String disp_horaria,
-			@NotEmpty(message = "El campo no puede estar vacio") String tareas_princiaples,
-			@NotEmpty(message = "El campo no puede estar vacio") @Positive(message = "El numero de jornada debe ser positivo") String jornada,
+			@NotEmpty(message = "El campo no puede estar vacio") String tareas_p,
+			@NotEmpty(message = "El campo no puede estar vacio") String jornada,
 			@NotEmpty(message = "El campo no puede estar vacio") String requisitos,
-			@NotEmpty(message = "El campo no puede estar vacio") @Positive(message = "El salario debe ser positivo") Double salario,
-			@NotEmpty(message = "El campo no puede estar vacio") String beneficios, boolean disponible) {
+			@PositiveOrZero(message = "El salario debe ser positivo") Double salario,
+			@NotEmpty(message = "El campo no puede estar vacio") String beneficios) {
 		super();
 		this.cant_vacantes = cant_vacantes;
 		this.puesto_req = puesto_req;
 		this.disp_horaria = disp_horaria;
-		this.tareas_princiaples = tareas_princiaples;
+		this.tareas_p = tareas_p;
 		this.jornada = jornada;
 		this.requisitos = requisitos;
 		this.salario = salario;
 		this.beneficios = beneficios;
-		this.disponible = disponible;
+		
+		this.disponible = true;
 	}
 	
 	/*
@@ -133,12 +139,12 @@ public class OfertaLaboral implements Serializable{
 		this.disp_horaria = disp_horaria;
 	}
 
-	public String getTareas_princiaples() {
-		return tareas_princiaples;
+	public String getTareas_p() {
+		return tareas_p;
 	}
 
-	public void setTareas_princiaples(String tareas_princiaples) {
-		this.tareas_princiaples = tareas_princiaples;
+	public void setTareas_p(String tareas_princiaples) {
+		this.tareas_p = tareas_princiaples;
 	}
 
 	public String getJornada() {
@@ -180,11 +186,19 @@ public class OfertaLaboral implements Serializable{
 	public void setDisponible(boolean disponible) {
 		this.disponible = disponible;
 	}
+	
+	public Empleador getContacto() {
+		return contacto;
+	}
+
+	public void setContacto(Empleador contacto) {
+		this.contacto = contacto;
+	}
 
 	@Override
 	public String toString() {
 		return "OfertaLaboral [id=" + id + ", cant_vacantes=" + cant_vacantes + ", puesto_req=" + puesto_req
-				+ ", disp_horaria=" + disp_horaria + ", tareas_princiaples=" + tareas_princiaples + ", jornada="
+				+ ", disp_horaria=" + disp_horaria + ", tareas_p=" + tareas_p + ", jornada="
 				+ jornada + ", requisitos=" + requisitos + ", salario=" + salario + ", beneficios=" + beneficios
 				+ ", disponible=" + disponible + "]";
 	}

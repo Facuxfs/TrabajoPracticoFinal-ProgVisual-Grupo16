@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ar.edu.unju.fi.edu.entity.Empleador;
 import ar.edu.unju.fi.edu.entity.OfertaLaboral;
+import ar.edu.unju.fi.edu.repository.IEmpleadorRepository;
 import ar.edu.unju.fi.edu.repository.IOfertaLaboralRepository;
 import ar.edu.unju.fi.edu.service.IOfertaLaboralService;
 
@@ -16,39 +18,53 @@ public class OfertaLaboralServiceImp implements IOfertaLaboralService {
 	private IOfertaLaboralRepository olRepository;
 	
 	@Override
-	public OfertaLaboral getOfertaLaboral() {
-		// TODO Auto-generated method stub
-		return null;
+	public OfertaLaboral getOfertaLaboral(Empleador contacto) {
+		// Retorna una OfertaLaboral
+		return new OfertaLaboral(contacto);
 	}
 
 	@Override
 	public boolean guardarOfertaLaboral(OfertaLaboral ofertaLaboral) {
-		// TODO Auto-generated method stub
-		return false;
+		// Guarda una OfertaLaboral en la base de datos
+		if(this.olRepository.save(ofertaLaboral) != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	@Override
 	public void modificarOfertaLaboral(OfertaLaboral ofertaLaboral) {
-		// TODO Auto-generated method stub
-
+		// El metodo "save()" busca en la base de datos la OfertaLaboral a modificar y actualiza los cambios
+		this.olRepository.save(ofertaLaboral);
 	}
 
 	@Override
+	public void modificarDisponibilidad(long ol_id) throws Exception {
+		// Desactiva la disponibilidad de una OfertaLaboral
+		OfertaLaboral ol = buscarOfertaLaboral(ol_id);
+		ol.setDisponible(false);
+		this.olRepository.save(ol);
+	}
+	
+	@Override
 	public void eliminarOfertaLaboral(long ol_id) {
-		// TODO Auto-generated method stub
+		// Elimina una OfertaLaboral de la base de datos
+		this.olRepository.deleteById(ol_id);
 
 	}
 
 	@Override
 	public List<OfertaLaboral> getListaOfertaLaboral() {
-		// TODO Auto-generated method stub
-		return null;
+		// Devuelve la lista de OfertasLaborales disponibles
+		return this.olRepository.findByDisponible(true);
 	}
 
 	@Override
-	public OfertaLaboral buscarOfertaLaboral(long ol_id) {
-		// TODO Auto-generated method stub
-		return null;
+	public OfertaLaboral buscarOfertaLaboral(long ol_id) throws Exception {
+		// Busca una OfertaLaboral de acuerdo a su id.
+		// En caso de no encontrar resultado, devuelve una escepcion.
+		return this.olRepository.findById(ol_id).orElseThrow(()-> new Exception("La OfertaLaboral no existe"));
 	}
-
 }

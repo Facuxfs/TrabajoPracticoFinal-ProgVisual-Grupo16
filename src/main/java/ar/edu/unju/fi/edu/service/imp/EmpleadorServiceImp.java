@@ -33,9 +33,9 @@ public class EmpleadorServiceImp implements IEmpleadorService {
 	}
 
 	@Override
-	public Empleador modificarEmpleador(Empleador empleador) throws Exception {
-		// El metodo "save()" busca en la base de datos el empleado a modificar y actualiza los cambios
-		return this.empleadorRepository.save(empleador);
+	public void modificarEmpleador(Empleador empleador) {
+		// El metodo "save()" busca en la base de datos el Empleado a modificar y actualiza los cambios
+		this.empleadorRepository.save(empleador);
 	}
 
 	@Override
