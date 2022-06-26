@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.edu.controller;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +23,8 @@ public class EmpleadorController {
 	
 	@Autowired
 	private IEmpleadorService empleadorService;
+	
+	private static final Log LOGGER = LogFactory.getLog(EmpleadorController.class);
 	
 	@GetMapping("/lista")
 	public String getEmpleadoresPage(Model model) {
@@ -70,7 +74,7 @@ public class EmpleadorController {
 	}
 	
 	@GetMapping("/editar/{e_cuit}")
-	public ModelAndView getEditarEmpleador(@PathVariable(value="e_cuit") long e_cuit) throws Exception {
+	public ModelAndView getEditarEmpleador(@PathVariable(value = "e_cuit") long e_cuit) throws Exception {
 		ModelAndView modelAV = new ModelAndView("edicion_empleador");
 		Empleador empleador = this.empleadorService.buscarEmpleador(e_cuit);
 		modelAV.addObject("empleador", empleador);
@@ -84,14 +88,15 @@ public class EmpleadorController {
 			modelAV.addObject("empleador", empleadorMod);
 			return modelAV;
 		}
-		
-		ModelAndView modelAV = new ModelAndView("redirect:/empleador/lista");
-		this.empleadorService.modificarEmpleador(empleadorMod);
-		return modelAV;
+		else {
+			ModelAndView modelAV = new ModelAndView("redirect:/empleador/lista");
+			this.empleadorService.modificarEmpleador(empleadorMod);
+			return modelAV;
+		}		
 	}
 	
-	@GetMapping("/eliminar/{e_cuit}")
-	public ModelAndView getEliminarEmpleador(@PathVariable(value = "e_cuit") long e_cuit) throws Exception {
+	@GetMapping("/desactivarE/{e_cuit}")
+	public ModelAndView getDesactivarEmpleador(@PathVariable(value = "e_cuit") long e_cuit) throws Exception {
 		ModelAndView modelAV = new ModelAndView("redirect:/empleador/lista");
 		this.empleadorService.modificarEstado(e_cuit);
 		return modelAV;

@@ -8,7 +8,7 @@ public interface IEmpleadorService {
 
 	public Empleador getEmpleador();
 	public boolean guardarEmpleador(Empleador empleador);
-	public Empleador modificarEmpleador(Empleador empleador) throws Exception;
+	public void modificarEmpleador(Empleador empleador);
 	public void modificarEstado(long e_cuit) throws Exception;
 	public void eliminarEmpleador(long e_cuit);
 	public List<Empleador> getListaEmpleado();

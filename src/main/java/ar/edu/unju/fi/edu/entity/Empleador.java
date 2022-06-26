@@ -114,6 +114,8 @@ public class Empleador implements Serializable{
 		this.provincia = provincia;
 		this.pagina_web = pagina_web;
 		this.descripcion = descripcion;
+		
+		this.estado = true;
 	}
 
 	/*

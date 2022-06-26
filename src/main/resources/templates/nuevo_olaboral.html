@@ -1,10 +1,90 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
+	<head>
+		<meta charset="UTF-8">
+		<title>Nueva Oferta Laboral</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	</head>
+	
+	<body class="container-fluid bg-secondary">
+		<header th:replace="/layouts/header :: header"></header>
+		
+		<section class="row bg-light py-2">
+			<h2 class="text-center">FORMULARIO OFERTA LABORAL</h2>
+			<hr />
+		
+			<form class="col-12 col-md-8 offset-md-2 mb-2 row" th:action="@{/olaboral/guardar}" th:object="${olaboral}" th:method="POST">
+				<div class="col-12 col-md-6">
+					<div class="mb-3">
+						<label for="idCantVacantes" class="form-label">Cantidad de Vacantes</label> 
+						<input type="number" class="form-control" id="idCantVacantes" name="cant_vacantes" th:field="*{cant_vacantes}" placeholder="Ingrese Cantidad de Vacantes" />
+						<div class="text-danger" th:if="${#fields.hasErrors('cant_vacantes')}" th:errors="*{cant_vacantes}" ></div>
+					</div>
+					
+					<div class="mb-3">
+						<label for="idPRequerido" class="form-label">Puesto Requerido</label> 
+						<input type="text" class="form-control" id="idPRequerido" name="puesto_req" th:field="*{puesto_req}" placeholder="Ingrese Puesto Requerido" />
+						<div class="text-danger" th:if="${#fields.hasErrors('puesto_req')}" th:errors="*{puesto_req}" ></div>
+					</div>
+					
+					<div class="mb-3">
+						<label for="idDispHoraria" class="form-label">Disponibilidad Horaria</label> 
+						<select class="form-select" aria-label="Default select example" id="idDispHoraria" th:field="*{disp_horaria}">
+							<option value="Manana">Mañana</option>
+							<option value="Tarde">Tarde</option>
+							<option value="Noche">Noche</option>
+						</select>
+						<div class="text-danger" th:if="${#fields.hasErrors('disp_horaria')}" th:errors="*{disp_horaria}" ></div>		
+					</div>
+					
+					<div class="mb-3">
+						<label for="idTPrincipales" class="form-label">Tareas Principales</label> 
+						<input type="text" class="form-control" id="idTPrincipales" name="tareas_p" th:field="*{tareas_p}" placeholder="Ingrese Tareas" />
+						<div class="text-danger" th:if="${#fields.hasErrors('tareas_p')}" th:errors="*{tareas_p}" ></div>
+					</div>
+				</div>
+				
+				<div class="col-12 col-md-6">
+					<div class="mb-3">
+						<label for="idJornada" class="form-label">Jornada</label> 
+						<input type="text" class="form-control" id="idJornada" name="jornada" th:field="*{jornada}" placeholder="Ingrese Jornada" />
+						<div class="text-danger" th:if="${#fields.hasErrors('jornada')}" th:errors="*{jornada}" ></div>
+					</div>
+					
+					<div class="mb-3">
+						<label for="idRequisito" class="form-label">Requisitos</label> 
+						<input type="text" class="form-control" id="idRequisito" name="requisitos" th:field="*{requisitos}" placeholder="Ingrese Requisitos" />
+						<div class="text-danger" th:if="${#fields.hasErrors('requisitos')}" th:errors="*{requisitos}" ></div>
+					</div>
+					
+					<div class="mb-3">
+						<label for="idSalario" class="form-label">Salario</label> 
+						<input type="number" class="form-control" id="idSalario" name="salario" th:field="*{salario}" placeholder="Ingrese Salario" />
+						<div class="text-danger" th:if="${#fields.hasErrors('salario')}" th:errors="*{salario}" ></div>
+					</div>
+				
+					<div class="mb-3">
+						<label for="idBeneficios" class="form-label">Beneficios</label> 
+						<input type="text" class="form-control" id="idBeneficios" name="beneficios" th:field="*{beneficios}" placeholder="Ingrese Beneficios" />
+						<div class="text-danger" th:if="${#fields.hasErrors('beneficios')}" th:errors="*{beneficios}" ></div>
+					</div>
+				</div>
+				
+				<div class="text-center">
+					<button type="submit" class="border-dark btn btn-primary m-2" >Enviar</button>
+					<a class="border-dark btn btn-secondary m-2" th:href="@{/empleador/lista}" id="idCancelar" >Cancelar</a>
+				</div>
+				
+				<input type="hidden" th:field="*{contacto.cuit}"/>
+			</form>	
+	
+			<hr />
+		</section>	
 
-</body>
+		<footer th:replace="/layouts/footer :: footer"></footer>
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+	</body>
 </html>

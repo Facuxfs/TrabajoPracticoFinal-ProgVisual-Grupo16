@@ -7,14 +7,15 @@
 		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 	</head>
 	
-	<body>
+	<body class="bg-secondary">
 		<header th:replace="/layouts/header :: header"></header>
-		<div class="container">
+		
+		<div class="container-fluid bg-light">
 			<br>
 			<p class="h4 mb-10">Lista de Empleadores</p>
 			<br>
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-			   <a th:href="@{/empleador/nuevo}" id="nuevo" class="btn btn-primary">Nuevo</a>
+			   <a th:href="@{/empleador/nuevo}" id="nuevoEmpleador" class="btn btn-primary">Nuevo</a>
 			</div>
 			<br>
 			<div class="col-12 d-flex justify-content-center">
@@ -43,8 +44,9 @@
 							<td th:text="${empleador.pagina_web}"></td>
 							<td th:text="${empleador.descripcion}"></td>
 							<td>
-								<a th:href="@{/empleador/editar/}+${empleador.cuit}" id="editarEmpleador" class="btn btn-warning">Editar</a>
-								<a th:href="@{/empleador/eliminar/}+${empleador.cuit}" id="eliminarCiudadano" class="btn btn-danger">Eliminar</a>
+								<a th:href="@{/empleador/editar/} + ${empleador.cuit}" id="editarEmpleador" class="btn btn-warning">Editar</a>
+								<a th:href="@{/empleador/desactivarE/} + ${empleador.cuit}" id="desactivarEmpleador" class="btn btn-danger">Dar Baja</a>
+								<a th:href="@{/olaboral/nuevo/} + ${empleador.cuit}" id="nuevaOLaboral" class="btn btn-primary">Nueva OL</a>
 							</td>
 						</tr>
 					</table>
