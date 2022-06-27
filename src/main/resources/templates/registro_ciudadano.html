@@ -63,15 +63,40 @@
 				</div>
 			</div>
 			
-	
-
-			<div class="mb-3">
-					<label for="provinciasId" class="form-label">Provincia</label> 
-					<input th:field=*{provincia} type="text" class="form-control" id="provinciasId" placeholder="Ingrese provincia">
-				</div>
+					<div class="mb-3">
+						<label for="ProvinciasId" class="form-label">Provincia</label> 
+						<select class="form-select" aria-label="Default select example" id="idProvincia" th:field="*{provincia}">
+							<option value="Jujuy">Jujuy</option>
+							<option value="Salta">Salta</option>
+							<option value="Tucuman">Tucuman</option>
+							<option value="Formosa">Formosa</option>
+							<option value="Misiones">Misiones</option>
+							<option value="Corrientes">Corrientes</option>
+							<option value="Chaco">Chaco</option>
+							<option value="Santa Fe">Santa Fe</option>
+							<option value="Entre Rios">Entre Rios</option>
+							<option value="Santiago del Estero">Santiago del Estero</option>
+							<option value="Catamarca">Catamarca</option>
+							<option value="La Rioja">La Rioja</option>
+							<option value="San Juan">San Juan</option>
+							<option value="Cordoba">Cordoba</option>
+							<option value="San Luis">San Luis</option>
+							<option value="Mendoza">Mendoza</option>
+							<option value="La Pampa">La Pampa</option>
+							<option value="Buenos Aires">Buenos Aires</option>
+							<option value="Neuquén">Neuquén</option>
+							<option value="Río Negro">Río Negro</option>
+							<option value="Chubut">Chubut</option>
+							<option value="Santa Cruz">Santa Cruz</option>
+							<option value="Tierra del Fuego">Tierra del Fuego</option>
+						</select>
+						<div class="text-danger" th:if="${#fields.hasErrors('provincia')}" th:errors="*{provincia}" ></div>		
+					</div>	
+				
 				<div class="mb-3">
 					<label for="telefonoId" class="form-label">Teléfono</label> 
 					<input th:field=*{telefono} type="number" class="form-control" id="telefonoId" placeholder="Ingrese telefono">
+					<div class="text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" ></div>
 				</div>
 				<div class="form-control">
 					<label for="telefonoId" class="form-label">Contraseña</label> 
