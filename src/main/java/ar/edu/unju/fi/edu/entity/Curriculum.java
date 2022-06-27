@@ -59,10 +59,9 @@ public class Curriculum implements Serializable{
 	}
 
 	
-	@OneToOne(cascade = {CascadeType.ALL})
-	@JoinColumn(name = "ciudadano_dni")
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ciudadano_id")
 	private Ciudadano ciudadano;
-
 
 	
 	

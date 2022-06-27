@@ -15,7 +15,8 @@
 			<br>
 	
 			<form th:action="@{/ciudadano/guardarcv}" method="POST" th:object="${cv}" >
-			
+					<input type="hidden" name="id" th:field="*{ciudadano.id}" id="id" />
+				<input type="hidden" name="dni" th:field="*{ciudadano.dni}" id="dni" />
 				<div class="mb-3">
 					<label for="explab" class="form-label">Experiencia laboral</label> 
 					<input th:field=*{experienciaLaboral} type="text" class="form-control" id="explab" placeholder="Escriba su experiencia laboral">
