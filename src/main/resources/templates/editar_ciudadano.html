@@ -14,8 +14,12 @@
 			<br>
 			<form th:action="@{/ciudadano/modificar}" method="POST" th:object="${ciudadano}">
 			<div class="mb-3">			
-					<input type="hidden" th:field="*{estado}"/>
+				
 					<input type="hidden" th:field="*{id}"/>
+					<input type="hidden" th:field="*{contrasenia}"/>
+					<input type="hidden" th:field="*{dni}"/>
+					<input type="hidden" th:field="*{estado}"/>
+					<input type="hidden" th:field="*{cv}"/>
 				</div>
 			
 				<div class="mb-3">

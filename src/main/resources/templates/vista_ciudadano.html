@@ -34,9 +34,9 @@
     <br>
     <a th:href="@{/ciudadano/crearcv/}+${ciudadano.dni}" class="btn btn-success">Crear</a>
     <br>
-     <a href="#" class="btn btn-primary">Editar</a>
+     <a th:href="@{/curriculum/modificar/}+${ciudadano.dni}" class="btn btn-primary">Editar</a>
       <br>
-      <a href="#" class="btn btn-primary">Descargar</a>
+      <a th:href="@{/curriculum/vercv/}+${ciudadano.dni}" class="btn btn-primary">Ver</a>
   </div>
 </div>
 
@@ -45,7 +45,7 @@
   <div class="card-body">
     <h5 class="card-title">ofertas laborales</h5>
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">ver</a>
+    <a th:href="@{/ciudadano/verofertas/}+${ciudadano.dni}" class="btn btn-primary">ver</a>
   </div>
 </div>
 
