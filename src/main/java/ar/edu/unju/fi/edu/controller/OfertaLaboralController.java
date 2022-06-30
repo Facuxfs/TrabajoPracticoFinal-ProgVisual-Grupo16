@@ -65,13 +65,12 @@ public class OfertaLaboralController {
 	@GetMapping("/editar/{ol_id}")
 	public ModelAndView getEditarOLaboral(@PathVariable(value = "ol_id") long ol_id) throws Exception {
 		ModelAndView modelAV = new ModelAndView("edicion_olaboral");
-		OfertaLaboral ofertaLaboral = this.olService.buscarOfertaLaboral(ol_id);
-		modelAV.addObject("olaboral", ofertaLaboral);
+		modelAV.addObject("olaboral", this.olService.buscarOfertaLaboral(ol_id));
 		return modelAV;
 	}
 	
 	@PostMapping("/modificar")
-	public ModelAndView postEditarOLaboral(@Validated @ModelAttribute("olaboral") OfertaLaboral olMod, BindingResult bindingR) throws Exception {
+	public ModelAndView postModificarOLaboral(@Validated @ModelAttribute("olaboral") OfertaLaboral olMod, BindingResult bindingR) throws Exception {
 		if(bindingR.hasErrors()) {
 			ModelAndView modelAV = new ModelAndView("nuevo_olaboral");
 			modelAV.addObject("olaboral", olMod);
@@ -84,7 +83,7 @@ public class OfertaLaboralController {
 		}
 	}
 	
-	@GetMapping("/desactivarOL/{ol_id}")
+	@GetMapping("/desactivar/{ol_id}")
 	public ModelAndView getDesactivarOLaboral(@PathVariable(value = "ol_id") long ol_id) throws Exception {
 		ModelAndView modelAV = new ModelAndView("redirect:/olaboral/lista");
 		this.olService.modificarDisponibilidad(ol_id);

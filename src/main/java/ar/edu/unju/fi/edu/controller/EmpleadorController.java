@@ -76,13 +76,12 @@ public class EmpleadorController {
 	@GetMapping("/editar/{e_cuit}")
 	public ModelAndView getEditarEmpleador(@PathVariable(value = "e_cuit") long e_cuit) throws Exception {
 		ModelAndView modelAV = new ModelAndView("edicion_empleador");
-		Empleador empleador = this.empleadorService.buscarEmpleador(e_cuit);
-		modelAV.addObject("empleador", empleador);
+		modelAV.addObject("empleador", this.empleadorService.buscarEmpleador(e_cuit));
 		return modelAV;
 	}
 	
 	@PostMapping("modificar")
-	public ModelAndView postEditarEmpleador(@Validated @ModelAttribute("empleador") Empleador empleadorMod, BindingResult bindingR) throws Exception {
+	public ModelAndView postModificarEmpleador(@Validated @ModelAttribute("empleador") Empleador empleadorMod, BindingResult bindingR) throws Exception {
 		if(bindingR.hasErrors()) {
 			ModelAndView modelAV = new ModelAndView("edicion_empleador");
 			modelAV.addObject("empleador", empleadorMod);

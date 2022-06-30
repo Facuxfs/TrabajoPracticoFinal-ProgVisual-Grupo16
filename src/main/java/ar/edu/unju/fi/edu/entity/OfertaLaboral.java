@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
 @Entity
@@ -29,7 +30,7 @@ public class OfertaLaboral implements Serializable{
 	@Column(name = "ol_id")
 	private long id;
 	
-	@PositiveOrZero(message = "La cantidad de vacantes debe ser positiva")
+	@Positive(message = "La cantidad de vacantes debe ser positiva")
 	@Column(name = "ol_nvacantes")
 	private int cant_vacantes;
 	
