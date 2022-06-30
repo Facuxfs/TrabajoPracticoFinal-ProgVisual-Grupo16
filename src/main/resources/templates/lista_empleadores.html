@@ -30,8 +30,7 @@
 							<th>Provincia</th>
 							<th>Pagina Web</th>
 							<th>Descripcion</th>
-							<th>Opciones</th>
-							
+							<th>Opciones</th>							
 						</tr>	
 						<tr th:each="empleador : ${empleadores}">
 							<td th:text="${empleador.cuit}"></td>
@@ -47,6 +46,7 @@
 								<a th:href="@{/empleador/editar/} + ${empleador.cuit}" id="editarEmpleador" class="btn btn-warning">Editar</a>
 								<a th:href="@{/empleador/desactivarE/} + ${empleador.cuit}" id="desactivarEmpleador" class="btn btn-danger">Dar Baja</a>
 								<a th:href="@{/olaboral/nuevo/} + ${empleador.cuit}" id="nuevaOLaboral" class="btn btn-primary">Nueva OL</a>
+								<a th:href="@{/curso/nuevo/} + ${empleador.cuit}" id="nuevoCurso" class="btn btn-primary">Nueva Curso</a>
 							</td>
 						</tr>
 					</table>

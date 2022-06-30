@@ -27,13 +27,13 @@ public class Empleador implements Serializable{
 	private static final long serialVersionUID = -6326069709113079285L;
 
 	@Positive(message = "El numero de cuit debe ser positivo")
-	@Min(value = 1000, message = "El N° de Cuit debe contener como minimo 4 caracteres")
+	@Min(value = 1000, message = "El N° de Cuit debe contener como minimo 4 digitos")
 	@Id
 	@Column(name = "e_cuit")
 	private long cuit;
 	
 	@NotEmpty(message = "El campo no puede estar vacio")
-	@Size(min = 4, max = 20, message = "La contraseña debe estar entre")
+	@Size(min = 4, max = 30, message = "La contraseña debe estar entre los 4 y 30 caracteres")
 	@Column(name = "e_password")
 	private String contrasenia;
 	
@@ -81,6 +81,9 @@ public class Empleador implements Serializable{
 	@OneToMany(mappedBy = "contacto", cascade = CascadeType.ALL)
 	private List<OfertaLaboral> ofertas = new ArrayList<OfertaLaboral>();
 
+	@OneToMany(mappedBy = "profesor", cascade = CascadeType.ALL)
+	private List<Curso> cursos = new ArrayList<Curso>();
+	
 	/*
 	 * Constructor no parametrizado
 	 */
@@ -215,6 +218,14 @@ public class Empleador implements Serializable{
 
 	public void setEstado(boolean estado) {
 		this.estado = estado;
+	}
+	
+	public List<OfertaLaboral> getOfertas() {
+		return ofertas;
+	}
+
+	public void setOfertas(List<OfertaLaboral> ofertas) {
+		this.ofertas = ofertas;
 	}
 
 	@Override

@@ -28,7 +28,7 @@
 							<th>Requisitos</th>
 							<th>Salario</th>
 							<th>Beneficios</th>
-							
+							<th>Opciones</th>							
 						</tr>	
 						<tr th:each="olaboral : ${olaborales}">
 							<td th:text="${olaboral.cant_vacantes}"></td>
@@ -41,7 +41,7 @@
 							<td th:text="${olaboral.beneficios}"></td>				
 							<td>
 								<a th:href="@{/olaboral/editar/} + ${olaboral.id}" id="editarOLaboral" class="btn btn-warning">Editar</a>
-								<a th:href="@{/olaboral/desactivarOL/} + ${olaboral.id}" id="desactivarOLaboral" class="btn btn-danger">Desactivar</a>
+								<a th:href="@{/olaboral/desactivar/} + ${olaboral.id}" id="desactivarOLaboral" class="btn btn-danger">Desactivar</a>
 							</td>
 						</tr>
 					</table>

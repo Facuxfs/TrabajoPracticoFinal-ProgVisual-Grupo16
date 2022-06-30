@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Nuevo Curso</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	</head>
+	
+	<body class="container-fluid bg-secondary">
+		<header th:replace="/layouts/header :: header"></header>
+		
+		<section class="row bg-light py-2">
+			<h2 class="text-center">FORMULARIO CURSO</h2>
+			<hr />
+		
+			<form class="col-12 col-md-8 offset-md-2 mb-2 row" th:action="@{/curso/guardar}" th:object="${curso}" th:method="POST">
+				<div class="col-12 col-md-6">
+					<div class="mb-3">
+						<label for="idCodigo" class="form-label">Codigo</label> 
+						<input type="number" class="form-control" id="idCodigo" name="codigo" th:field="*{codigo}" placeholder="Ingrese un Codigo" />
+						<div class="text-danger" th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}" ></div>
+					</div>
+					
+					<div class="mb-3">
+						<label for="idTitulo" class="form-label">Titulo</label> 
+						<input type="text" class="form-control" id="idTitulo" name="titulo" th:field="*{titulo}" placeholder="Ingrese Titulo" />
+						<div class="text-danger" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}" ></div>
+					</div>
+					
+					<div class="mb-3">
+						<label for="idCategoria" class="form-label">Categoria</label> 
+						<select class="form-select" aria-label="Default select example" id="idCategoria" th:field="*{categoria}">
+							<option value="Inicial">Inicial</option>
+							<option value="Intermedio">Intermedio</option>
+							<option value="Avanzado">Avanzado</option>
+						</select>
+						<div class="text-danger" th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}" ></div>		
+					</div>
+					
+					<div class="mb-3 form-group row">
+						<label for="idFechaI" class="form-label">Fecha de Inicio</label>
+						<div class="col-lg-9 input-group date" id="datetimepicker2" data-target-input="nearest" >
+							<input type="date" class="form-control datatimepicker-input" data-target="#datetimepicker2"
+									id="idFechaI" placeholder="Ingrese Fecha de Inicio" th:field="${curso.fecha_inicio}" />
+							<div class="input-group-append" data-target="#daratimepicker2" data-toggle="datatimepicker" ></div>
+						</div>
+						<div class="text-danger" th:if="${#fields.hasErrors('fecha_inicio')}" th:errors="*{fecha_inicio}" ></div>					
+					</div>
+				</div>
+				
+				<div class="col-12 col-md-6">
+					<div class="mb-3 form-group row">
+						<label for="idFechaF" class="form-label">Fecha de Cierre</label>
+						<div class="col-lg-9 input-group date" id="datetimepicker2" data-target-input="nearest" >
+							<input type="date" class="form-control datatimepicker-input" data-target="#datetimepicker2"
+									id="idFechaF" placeholder="Ingrese Fecha de Cierre" th:field="${curso.fecha_fin}" />
+							<div class="input-group-append" data-target="#daratimepicker2" data-toggle="datatimepicker" ></div>
+						</div>
+						<div class="text-danger" th:if="${#fields.hasErrors('fecha_fin')}" th:errors="*{fecha_fin}" ></div>					
+					</div>	
+					
+					<div class="mb-3">
+						<label for="idCantidadH" class="form-label">Cantidad de Horas</label> 
+						<input type="number" class="form-control" id="idCantidadH" name="cant_horas" th:field="*{cant_horas}" placeholder="Ingrese Cantidad de Horas" />
+						<div class="text-danger" th:if="${#fields.hasErrors('cant_horas')}" th:errors="*{cant_horas}" ></div>
+					</div>
+					
+					<div class="mb-3">
+						<label for="idModalidad" class="form-label">Modalidad</label> 
+						<select class="form-select" aria-label="Default select example" id="idModalidad" th:field="*{modalidad}">
+							<option value="Presencial">Presencial</option>
+							<option value="Virtual">Virtual</option>
+							<option value="Mixto">Mixto</option>
+						</select>
+						<div class="text-danger" th:if="${#fields.hasErrors('modalidad')}" th:errors="*{modalidad}" ></div>		
+					</div>
+				</div>
+				
+				<div class="text-center">
+					<button type="submit" class="border-dark btn btn-primary m-2" >Enviar</button>
+					<a class="border-dark btn btn-secondary m-2" th:href="@{/curso/lista}" id="idCancelar" >Cancelar</a>
+				</div>
+				
+				<input type="hidden" th:field="*{profesor.cuit}"/>
+			</form>	
+	
+			<hr />
+		</section>	
+
+		<footer th:replace="/layouts/footer :: footer"></footer>
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+	</body>
+</html>
