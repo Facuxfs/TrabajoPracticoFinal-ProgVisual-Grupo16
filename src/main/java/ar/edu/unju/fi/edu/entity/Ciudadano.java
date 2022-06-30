@@ -81,7 +81,6 @@ public class Ciudadano implements Serializable {
 	private Curriculum cv;
 
 	
-	
 	public String getNombre() {
 		return nombre;
 	}

@@ -18,6 +18,8 @@ import ar.edu.unju.fi.edu.entity.Ciudadano;
 import ar.edu.unju.fi.edu.entity.Curriculum;
 import ar.edu.unju.fi.edu.service.ICiudadanoService;
 import ar.edu.unju.fi.edu.service.ICurriculumService;
+import ar.edu.unju.fi.edu.service.IOfertaLaboralService;
+
 
 @Controller
 @RequestMapping("/ciudadano")
@@ -28,6 +30,9 @@ public class CiudadanoController {
 
 	@Autowired
 	private ICurriculumService curriculumService;
+	
+	@Autowired
+	private IOfertaLaboralService ofertalaboralService;
 
 	@GetMapping("/nuevo")
 	public String nuevoCiudadano(Model model) {
@@ -36,12 +41,20 @@ public class CiudadanoController {
 	}
 
 	@PostMapping("/guardar")
-	public ModelAndView guardarCiudadano(@ModelAttribute("ciudadano") Ciudadano ciudadano) {
+	public ModelAndView guardarCiudadano(@Validated @ModelAttribute("ciudadano") Ciudadano ciudadano, 
+		BindingResult bindingResult) throws Exception{
+		if (bindingResult.hasErrors()) {
+			ModelAndView modelAV = new ModelAndView("registro_ciudadano");
+			modelAV.addObject("ciudadano", ciudadano);
+			return modelAV;
+		}else {
 		String dnic = String.valueOf(ciudadano.getDni());
+		ciudadano.setEstado(true);
 		ModelAndView mav = new ModelAndView("redirect:/ciudadano/vistaciudadano/" + dnic);
 		ciudadanoService.guardarCiudadano(ciudadano);
 		mav.addObject(ciudadano);
 		return mav;
+		}
 	}
 
 	@GetMapping("/listaciudadanos")
@@ -59,25 +72,28 @@ public class CiudadanoController {
 	}
 
 	@GetMapping("/editar/{dni}")
-	public String EditarCiudadano(@PathVariable(value = "dni") int dni, Model model) {
-		model.addAttribute("ciudadano", ciudadanoService.buscarCiudadano(dni));
-		return "editar_ciudadano";
+	public ModelAndView EditarCiudadano(@PathVariable(value = "dni") int dni) {
+		ModelAndView model = new ModelAndView("editar_ciudadano");
+		model.addObject("ciudadano", ciudadanoService.buscarCiudadano(dni));
+		return model;
 	}
 
 	@PostMapping("/modificar")
 	public ModelAndView modificarCiudadano(@Validated @ModelAttribute("ciudadano") Ciudadano ciudadano,
 			BindingResult bindingResult) throws Exception {
-		if (bindingResult.hasErrors()) {
-			System.out.println("nada nada nada");
-			ModelAndView mav = new ModelAndView("editar_ciudadano");
-			mav.addObject("ciudadano", ciudadano);
-			System.out.println(mav.toString());
-			return mav;
-		}else {
-		ModelAndView mav = new ModelAndView("redirect:/ciudadano/listaciudadanos");
+	//	if (bindingResult.hasErrors()) {
+			//System.out.println("nada nada nada");
+			//ModelAndView mav = new ModelAndView("editar_ciudadano");
+			//mav.addObject("ciudadano", ciudadano);
+		//	return mav;
+	
+	//}else {
+			
+		String dnic = String.valueOf(ciudadano.getDni());
+			ModelAndView mav = new ModelAndView("redirect:/ciudadano/vistaciudadano/" + dnic);
 		ciudadanoService.modificarCiudadano(ciudadano);
 		return mav;
-	}
+	//	}
 	}
 
 	@GetMapping("/crearcv/{dni}")
@@ -89,15 +105,13 @@ public class CiudadanoController {
 		
 		return "nuevo_curriculum";
 	}
-
-	@PostMapping("/guardarcv")
-	public ModelAndView guardarCv(@ModelAttribute("cv") Curriculum cv,@ModelAttribute("ciudadano") Ciudadano ciudadano) {
-		curriculumService.guardarCurriculum(cv);
-		String dnic = String.valueOf(cv.getCiudadano().getDni());
-		ModelAndView mav = new ModelAndView("redirect:/ciudadano/vistaciudadano/" + dnic);
-		mav.addObject(ciudadano);
+	
+	@GetMapping("/verofertas/{dni}")
+	public ModelAndView mostrarListaOfertas(@PathVariable(value = "dni") int dni) {
+		ModelAndView model = new ModelAndView("lista_ofertasciudadano");
+		model.addObject("ofertas", ofertalaboralService.getListaOfertaLaboral());
 		
-		return mav;
+		return model;
 	}
 
 }

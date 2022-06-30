@@ -11,12 +11,13 @@
 		<header th:replace="/layouts/header :: header"></header>
 		<div class="container col-4">
 			<br>
-			<p class="h4">Registrate AQUI</p>
+			<p class="h4">Editar Empleador</p>
 			<br>
 	
-			<form th:action="@{/curriculum/guardarcv}" method="POST" th:object="${cv}" >
+			<form th:action="@{/curriculum/modificarcv/}+${ciudadano.dni}" method="POST" th:object="${cv}" >
 					<input type="hidden" name="id" th:field="*{ciudadano.id}" id="id" />
-				<input type="hidden" name="dni" th:field="*{ciudadano.dni}" id="dni" />
+					<input type="hidden" name="id" th:field="*{ciudadano.dni}" id="id" />
+					<input type="hidden" name="id" th:field="*{id}" id="id" />
 				<div class="mb-3">
 					<label for="explab" class="form-label">Experiencia laboral</label> 
 					<input th:field=*{experienciaLaboral} type="text" class="form-control" id="explab" placeholder="Escriba su experiencia laboral">
@@ -54,7 +55,7 @@
 				</div>
 					<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 					<button class="btn btn-primary me-md-2" type="submit">Enviar</button>
-					 <a th:href="@{/inicio}" id="cancel" class="btn btn-secondary">Cancelar</a>
+					 <a th:action="@{/ciudadano/vistaciudadano/}+${ciudadano.dni}" id="cancel" class="btn btn-secondary">Cancelar</a>
 	  				<!-- <button class="btn btn-secondary" type="reset">Cancelar</button> -->
 				</div>
 			
@@ -65,7 +66,5 @@
 		<script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
 		<script type="text/javascript" th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
 		<script type="text/javascript" th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
-	
-	
 	</body>
 </html>
