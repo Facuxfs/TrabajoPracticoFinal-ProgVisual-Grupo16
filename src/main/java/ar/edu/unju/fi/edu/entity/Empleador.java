@@ -216,6 +216,14 @@ public class Empleador implements Serializable{
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
+	
+	public List<OfertaLaboral> getOfertas() {
+		return ofertas;
+	}
+
+	public void setOfertas(List<OfertaLaboral> ofertas) {
+		this.ofertas = ofertas;
+	}
 
 	@Override
 	public String toString() {

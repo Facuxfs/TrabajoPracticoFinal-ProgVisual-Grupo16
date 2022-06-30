@@ -1,7 +1,10 @@
 package ar.edu.unju.fi.edu.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.PositiveOrZero;
@@ -62,7 +66,10 @@ public class OfertaLaboral implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "e_cuit")
-	private Empleador contacto;	
+	private Empleador contacto;
+	
+	@OneToMany(mappedBy = "nombre", cascade = CascadeType.ALL)
+	private List<Ciudadano> postulantes = new ArrayList<Ciudadano>();
 
 	/*
 	 * Constructor no parametrizado
@@ -195,6 +202,14 @@ public class OfertaLaboral implements Serializable{
 		this.contacto = contacto;
 	}
 
+	public List<Ciudadano> getPostulantes() {
+		return postulantes;
+	}
+
+	public void setPostulantes(List<Ciudadano> postulantes) {
+		this.postulantes = postulantes;
+	}
+	
 	@Override
 	public String toString() {
 		return "OfertaLaboral [id=" + id + ", cant_vacantes=" + cant_vacantes + ", puesto_req=" + puesto_req
