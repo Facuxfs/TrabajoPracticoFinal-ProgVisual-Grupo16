@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.edu.entity;
 
 import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
@@ -69,9 +71,22 @@ public class OfertaLaboral implements Serializable{
 	@JoinColumn(name = "e_cuit")
 	private Empleador contacto;
 	
-	@OneToMany(mappedBy = "nombre", cascade = CascadeType.ALL)
+	
+	
+	
+
+	 @JoinTable(
+		        name = "rel_oferta_cdno",
+		        joinColumns = @JoinColumn(name = "Postulantes", nullable = false),
+		        inverseJoinColumns = @JoinColumn(name="Oferta", nullable = false)
+		    )
+		    @ManyToMany(cascade = CascadeType.ALL)
 	private List<Ciudadano> postulantes = new ArrayList<Ciudadano>();
 
+	
+	
+	
+	
 	/*
 	 * Constructor no parametrizado
 	 */
