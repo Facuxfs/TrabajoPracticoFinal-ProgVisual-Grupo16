@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.edu.entity.OfertaLaboral;
+import ar.edu.unju.fi.edu.service.ICiudadanoService;
+import ar.edu.unju.fi.edu.service.IOfertaLaboralService;
 import ar.edu.unju.fi.edu.service.imp.EmpleadorServiceImp;
 import ar.edu.unju.fi.edu.service.imp.OfertaLaboralServiceImp;
 
@@ -27,6 +29,10 @@ public class OfertaLaboralController {
 	
 	@Autowired
 	private EmpleadorServiceImp empleadorService;
+	
+	@Autowired
+	private ICiudadanoService ciudadanoService;
+	
 	
 	private static final Log LOGGER = LogFactory.getLog(OfertaLaboralController.class);
 	
@@ -89,4 +95,14 @@ public class OfertaLaboralController {
 		this.olService.modificarDisponibilidad(ol_id);
 		return modelAV;
 	}
+	
+	@GetMapping("registrarPostulantes/{dni}/{id}")
+	public ModelAndView registrarPostulantes(@PathVariable(value = "dni") int dni, @PathVariable("id") long id) throws Exception {
+		String dnic = String.valueOf(ciudadanoService.buscarCiudadano(dni).getDni());
+		ModelAndView mav = new ModelAndView("redirect:/ciudadano/verofertas/" + dnic);
+		olService.buscarOfertaLaboral(id).getPostulantes().add(ciudadanoService.buscarCiudadano(dni));
+		System.out.println(id+"esta es la oferta ");
+		return mav;
+	}
+	
 }

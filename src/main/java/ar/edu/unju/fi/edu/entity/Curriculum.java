@@ -18,7 +18,6 @@ import javax.validation.constraints.NotEmpty;
 @Entity
 @Table(name = "CVs")
 public class Curriculum implements Serializable{
-
 	
 	private static final long serialVersionUID = 1L;
 	

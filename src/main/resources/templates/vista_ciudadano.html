@@ -13,52 +13,53 @@
 <br>
 
 
-<div class="container">
+<section class="container">
 	<div class="row" >
 
 <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
+  <img th:src="@{/images/iconoperfil.jpg}" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">Mi Perfil</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <h3 class="card-title"  th:text="${ciudadano.nombre}"> </h3>
+     <p class="card-title" > este es tu perfil :</p>
+    <p class="card-text">Aqui podras agregar/modificar tus datos personales o cerrar tu cesion.</p>
     <a th:href="@{/ciudadano/editar/}+${ciudadano.dni}" id="editarCiudadano" class="btn btn-success">Editar</a>
     <a href="#" class="btn btn-primary">Salir</a>
   </div>
-</div>
-	
+</div> 
+
 	<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
+    <img src="../static/images/iconocv.jpg" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">Curriculum Vitae</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <h5 class="card-title"> Crea tu Curriculum :</h5>
+    <p class="card-text">Aqui podras crear tu curriculum vitae, verlo, modificarlo o descargarlo cuando desees.</p>
     <br>
     <a th:href="@{/ciudadano/crearcv/}+${ciudadano.dni}" class="btn btn-success">Crear</a>
-    <br>
+   
      <a th:href="@{/curriculum/modificar/}+${ciudadano.dni}" class="btn btn-primary">Editar</a>
-      <br>
+   
       <a th:href="@{/curriculum/vercv/}+${ciudadano.dni}" class="btn btn-primary">Ver</a>
   </div>
 </div>
 
 <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
+  <img src="../static/images/iconotrabajo.jpg" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">ofertas laborales</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <h5 class="card-title">Ofertas laborales :</h5>
+    <p class="card-text">Aqui podras ver las ofertas laborales actuales en el mercado y postularte a ellas.</p>
     <a th:href="@{/ciudadano/verofertas/}+${ciudadano.dni}" class="btn btn-primary">ver</a>
   </div>
 </div>
 
 <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
+  <img src="../static/images/iconocurso.jpg" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">Cursos Online</h5>
-    <p class="card-text">ard title and make up the bulk of the card's content.</p>
+    <h5 class="card-title">Cursos Online :</h5>
+    <p class="card-text">Aqui podras ver los cursos actuales en el mercado y inscribirte a ellos.</p>
     <a href="#" class="btn btn-primary">ver </a>
   </div>
 </div>
 	</div>
-</div>
+</section>
 <br>
 	<footer th:replace="/layouts/footer :: footer"></footer>
 	<script type="text/javascript"
