@@ -81,10 +81,16 @@ public class OfertaLaboral implements Serializable{
 		        inverseJoinColumns = @JoinColumn(name="Oferta", nullable = false)
 		    )
 		    @ManyToMany(cascade = CascadeType.ALL)
-	private List<Ciudadano> postulantes = new ArrayList<Ciudadano>();
+	private List<Ciudadano> postulantes ;
 
 	
-	
+	 public void addPostulante(Ciudadano ciudadano){
+	        if(this.postulantes == null){
+	            this.postulantes = new ArrayList<>();
+	        }
+	        
+	        this.postulantes.add(ciudadano);
+	    }
 	
 	
 	/*

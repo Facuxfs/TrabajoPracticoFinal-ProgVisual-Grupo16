@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unju.fi.edu.entity.Ciudadano;
 import ar.edu.unju.fi.edu.entity.OfertaLaboral;
 import ar.edu.unju.fi.edu.service.ICiudadanoService;
 import ar.edu.unju.fi.edu.service.IOfertaLaboralService;
@@ -100,8 +101,9 @@ public class OfertaLaboralController {
 	public ModelAndView registrarPostulantes(@PathVariable(value = "dni") int dni, @PathVariable("id") long id) throws Exception {
 		String dnic = String.valueOf(ciudadanoService.buscarCiudadano(dni).getDni());
 		ModelAndView mav = new ModelAndView("redirect:/ciudadano/verofertas/" + dnic);
-		olService.buscarOfertaLaboral(id).getPostulantes().add(ciudadanoService.buscarCiudadano(dni));
-		System.out.println(id+"esta es la oferta ");
+		Ciudadano unCiudadano = ciudadanoService.buscarCiudadano(dni);
+		olService.agregarPostulante(id, unCiudadano);
+		System.out.println(olService.buscarOfertaLaboral(id).getPostulantes());
 		return mav;
 	}
 	

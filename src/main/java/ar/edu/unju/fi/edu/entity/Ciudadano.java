@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -80,7 +82,20 @@ public class Ciudadano implements Serializable {
 	@OneToOne(mappedBy = "ciudadano", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private Curriculum cv;
 
+	  @ManyToMany(mappedBy = "postulantes")
+	    private List<OfertaLaboral> postulaciones;
+	  
+	  
 	
+	
+	public List<OfertaLaboral> getPostulaciones() {
+		return postulaciones;
+	}
+
+	public void setPostulaciones(List<OfertaLaboral> postulaciones) {
+		this.postulaciones = postulaciones;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}

@@ -18,4 +18,6 @@ public interface IOfertaLaboralRepository extends JpaRepository<OfertaLaboral, L
 	public void deleteById(long ol_id);
 	
 	public List<OfertaLaboral> findByDisponible(boolean disponible);	
+	
+	public List<OfertaLaboral> findByContacto(long cuit);
 }

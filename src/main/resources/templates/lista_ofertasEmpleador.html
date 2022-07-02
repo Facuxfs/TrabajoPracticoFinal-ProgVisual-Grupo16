@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+	 <meta charset="UTF-8"> 
+		
+		<title>Inicio</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	</head>
+		<header th:replace="/layouts/header :: header"></header>
+			
+	<body>
+
+	<div class="container">
+		<div class="row">
+			<!-- Cards -->
+			<div class="row">
+				<!-- CARDS -->
+				<div th:each="oferta:${ofertas}" class="col-3">
+					
+							<div class="card" style="width: 300px;">
+								<div class="card-body">
+									<h5 th:text="${oferta}" class="card-title"></h5>
+<a class="btn btn-secondary btn-sm"	th:href="@{/empleador/verpostulantes/{id}
+						(id = ${oferta.id})}" title="Registrar postulacion">
+						 Ver oferta :</a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+	
+
+	<script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+			<footer th:replace="/layouts/footer :: footer"></footer>
+	</body>
+	
+
+</html>
