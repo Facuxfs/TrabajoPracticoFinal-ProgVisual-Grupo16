@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.edu.entity.Ciudadano;
+import ar.edu.unju.fi.edu.entity.OfertaLaboral;
 import ar.edu.unju.fi.edu.repository.CiudadanoRepository;
 import ar.edu.unju.fi.edu.service.ICiudadanoService;
 
@@ -56,4 +57,19 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 		return ciudadanoRepository.findByDni(dni);
 	}
 
+	@Override
+	public void agregarOfertaAceptada(int dni, OfertaLaboral oferta) throws Exception {
+		Ciudadano unCiudadano = this.buscarCiudadano(dni);
+//		OfertaLaboral unaOferta = this.buscarOfertaLaboral(id);
+		List<OfertaLaboral> unaLista = unCiudadano.getPostulaciones();
+//		List<Ciudadano> unaLista = unaOferta.getPostulantes();
+		unaLista.add(oferta);
+//		unaLista.add(ciudadano);
+		unCiudadano.setPostulaciones(unaLista);
+//		unaOferta.setPostulantes(unaLista);
+		ciudadanoRepository.save(unCiudadano);
+
+	}
+	
+	
 }

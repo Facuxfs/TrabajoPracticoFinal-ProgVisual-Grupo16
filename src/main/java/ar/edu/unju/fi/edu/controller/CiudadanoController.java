@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.edu.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -96,6 +98,8 @@ public class CiudadanoController {
 		return mav;
 	//	}
 	}
+	
+
 
 	@GetMapping("/crearcv/{dni}")
 	public String CrearCv(@PathVariable(value = "dni") int dni, Model model) {
@@ -115,5 +119,16 @@ public class CiudadanoController {
 		model.addObject("dni", dni);
 		return model;
 	}
+	
+	@GetMapping("/verresultados/{dni}")
+	public ModelAndView mostrarListaResultados(@PathVariable(value = "dni") int dni) {
+		ModelAndView model = new ModelAndView("lista_resultados");
+		Ciudadano unCiudadano = ciudadanoService.buscarCiudadano(dni);
+		model.addObject("resultados", unCiudadano.getPostulaciones());
+		model.addObject("oferta", new OfertaLaboral());
+		model.addObject("dni", dni);
+		return model;
+	}
+	
 
 }
