@@ -21,11 +21,22 @@
 					
 							<div class="card" style="width: 300px;">
 								<div class="card-body">
+							
 									<h5 th:text="${postulante.nombre}" class="card-title"></h5>
-<a class="btn btn-secondary btn-sm"	th:href="@{/empleador/verpostulantes/{id}
-						(id = ${oferta.id})}" title="Registrar postulacion">
-						 Aceptar solicitud </a>
+									<h5 th:text="${postulante.email}" class="card-title"></h5>
+									<a class="btn btn-secondary btn-sm"	th:href="@{/empleador/aceptarpostulante/{dni}
+					(dni = ${postulante.dni})}" title="Registrar postulacion">
+						 Ver curriculum : </a>
+						
 								</div>
+								
+						 
+						 <a class="btn btn-secondary btn-sm"	th:href="@{/empleador/aceptarpostulante/{id}/{dni}
+						(id = ${id}, dni = ${postulante.dni})}" title="Registrar postulacion">
+						 Aceptar Solicitud</a>
+								<a class="btn btn-secondary btn-sm"	th:href="@{/empleador/aceptarpostulante/{id}/{dni}
+						(id = ${oferta.id}),(dni = ${postulante.dni})}" title="Registrar postulacion">
+						 Rechazar solicitud </a>
 							</div>
 
 						</div>

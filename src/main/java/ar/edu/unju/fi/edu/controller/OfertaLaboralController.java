@@ -101,6 +101,7 @@ public class OfertaLaboralController {
 	public ModelAndView registrarPostulantes(@PathVariable(value = "dni") int dni, @PathVariable("id") long id) throws Exception {
 		String dnic = String.valueOf(ciudadanoService.buscarCiudadano(dni).getDni());
 		ModelAndView mav = new ModelAndView("redirect:/ciudadano/verofertas/" + dnic);
+		mav.addObject("oferta", olService.buscarOfertaLaboral(id));
 		Ciudadano unCiudadano = ciudadanoService.buscarCiudadano(dni);
 		olService.agregarPostulante(id, unCiudadano);
 		System.out.println(olService.buscarOfertaLaboral(id).getPostulantes());

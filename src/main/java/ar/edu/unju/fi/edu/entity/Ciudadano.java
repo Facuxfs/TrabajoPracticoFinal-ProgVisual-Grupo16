@@ -85,8 +85,7 @@ public class Ciudadano implements Serializable {
 	  @ManyToMany(mappedBy = "postulantes")
 	    private List<OfertaLaboral> postulaciones;
 	  
-	  
-	
+
 	
 	public List<OfertaLaboral> getPostulaciones() {
 		return postulaciones;
@@ -222,4 +221,8 @@ public class Ciudadano implements Serializable {
 				+ ", cv=" + cv + "]";
 	}
 
-}
+
+	
+	}
+
+

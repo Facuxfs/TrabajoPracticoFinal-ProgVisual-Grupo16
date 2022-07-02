@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unju.fi.edu.entity.Ciudadano;
 import ar.edu.unju.fi.edu.entity.Empleador;
 import ar.edu.unju.fi.edu.entity.OfertaLaboral;
+import ar.edu.unju.fi.edu.service.ICiudadanoService;
 import ar.edu.unju.fi.edu.service.IEmpleadorService;
 import ar.edu.unju.fi.edu.service.IOfertaLaboralService;
 
@@ -30,6 +32,10 @@ public class EmpleadorController {
 	
 	@Autowired
 	private IOfertaLaboralService ofertalaboralService;
+	
+	@Autowired
+	private ICiudadanoService ciudadanoService;
+	
 	
 	private static final Log LOGGER = LogFactory.getLog(EmpleadorController.class);
 	
@@ -129,7 +135,17 @@ public class EmpleadorController {
 		ModelAndView model = new ModelAndView("lista_postulantes");
 		System.out.println(ofertalaboralService.getListaCandidatos(id));
 		model.addObject("postulantes", ofertalaboralService.getListaCandidatos(id));
-		model.addObject("oferta", new OfertaLaboral());
+		model.addObject("id",id);
 		return model;
 	}
+	
+	@GetMapping("/aceptarpostulante/{id}/{dni}")
+	public ModelAndView aceptarPostulante(@PathVariable(value="id")long id,@PathVariable(value="dni")int dni) throws Exception {
+		String idc = String.valueOf(ofertalaboralService.buscarOfertaLaboral(id).getId());
+		ModelAndView mav = new ModelAndView("redirect:/empleador/verpostulantes/" + idc);
+		OfertaLaboral unaOferta = ofertalaboralService.buscarOfertaLaboral(id);
+		ciudadanoService.agregarOfertaAceptada(dni, unaOferta);
+		return mav;
+	}
+	
 }
