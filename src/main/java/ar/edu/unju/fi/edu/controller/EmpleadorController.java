@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.edu.controller;
 
+
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.edu.entity.Empleador;
+import ar.edu.unju.fi.edu.entity.OfertaLaboral;
 import ar.edu.unju.fi.edu.service.IEmpleadorService;
+import ar.edu.unju.fi.edu.service.IOfertaLaboralService;
 
 @Controller
 @RequestMapping("/empleador")
@@ -23,6 +27,9 @@ public class EmpleadorController {
 	
 	@Autowired
 	private IEmpleadorService empleadorService;
+	
+	@Autowired
+	private IOfertaLaboralService ofertalaboralService;
 	
 	private static final Log LOGGER = LogFactory.getLog(EmpleadorController.class);
 	
@@ -99,5 +106,30 @@ public class EmpleadorController {
 		ModelAndView modelAV = new ModelAndView("redirect:/empleador/lista");
 		this.empleadorService.modificarEstado(e_cuit);
 		return modelAV;
+	}
+	
+	@GetMapping("/vistaempleador/{cuit}")
+	public ModelAndView mostrarMenuCiudadano(@PathVariable(value = "cuit") long ciut) throws Exception {
+		ModelAndView mav = new ModelAndView("vista_empleador");
+		mav.addObject("empleador", empleadorService.buscarEmpleador(ciut));
+		return mav;
+	}
+	
+	
+	@GetMapping("/verofertas/{cuit}")
+	public ModelAndView mostrarListaOfertas(@PathVariable(value = "cuit") long cuit) throws Exception {
+		ModelAndView model = new ModelAndView("lista_ofertasEmpleador");
+		model.addObject("ofertas", empleadorService.buscarEmpleador(cuit).getOfertas());
+		model.addObject("oferta", new OfertaLaboral());
+		return model;
+	}
+	
+	@GetMapping("/verpostulantes/{id}")
+	public ModelAndView mostrarListaPostulantes(@PathVariable(value = "id") long id) throws Exception {
+		ModelAndView model = new ModelAndView("lista_postulantes");
+		System.out.println(ofertalaboralService.getListaCandidatos(id));
+		model.addObject("postulantes", ofertalaboralService.getListaCandidatos(id));
+		model.addObject("oferta", new OfertaLaboral());
+		return model;
 	}
 }

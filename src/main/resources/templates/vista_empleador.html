@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Vista principal ciudadano</title>
+<title>Vista principal empleador</title>
 <link rel="stylesheet" type="text/css"
 	th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
@@ -19,34 +19,20 @@
 <div class="card" style="width: 18rem;">
   <img th:src="@{/images/iconoperfil.jpg}" class="card-img-top" alt="...">
   <div class="card-body">
-    <h3 class="card-title"  th:text="${ciudadano.nombre}"> </h3>
+    <h3 class="card-title"  th:text="${empleador.nombre_comercial}"> </h3>
      <p class="card-title" > este es tu perfil :</p>
     <p class="card-text">Aqui podras agregar/modificar tus datos personales o cerrar tu cesion.</p>
-    <a th:href="@{/ciudadano/editar/}+${ciudadano.dni}" id="editarCiudadano" class="btn btn-success">Editar</a>
+    <a href="#" id="editarCiudadano" class="btn btn-success">Editar</a>
     <a href="#" class="btn btn-primary">Salir</a>
   </div>
 </div> 
-
-	<div class="card" style="width: 18rem;">
-    <img th:src="@{/images/iconocv.jpg}" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title"> Crea tu Curriculum :</h5>
-    <p class="card-text">Aqui podras crear tu curriculum vitae, verlo, modificarlo o descargarlo cuando desees.</p>
-    <br>
-    <a th:href="@{/ciudadano/crearcv/}+${ciudadano.dni}" class="btn btn-success">Crear</a>
-   
-     <a th:href="@{/curriculum/modificar/}+${ciudadano.dni}" class="btn btn-primary">Editar</a>
-   
-      <a th:href="@{/curriculum/vercv/}+${ciudadano.dni}" class="btn btn-primary">Ver</a>
-  </div>
-</div>
 
 <div class="card" style="width: 18rem;">
   <img th:src="@{/images/iconotrabajo.jpg}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">Ofertas laborales :</h5>
     <p class="card-text">Aqui podras ver las ofertas laborales actuales en el mercado y postularte a ellas.</p>
-    <a th:href="@{/ciudadano/verofertas/}+${ciudadano.dni}" class="btn btn-primary">ver</a>
+    <a th:href="@{/empleador/verofertas/}+${empleador.cuit}" class="btn btn-primary">ver</a>
   </div>
 </div>
 
@@ -70,5 +56,4 @@
 		th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
 </body>
 </html>
-
 

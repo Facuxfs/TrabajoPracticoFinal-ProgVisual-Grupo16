@@ -80,6 +80,9 @@ public class Empleador implements Serializable{
 
 	@OneToMany(mappedBy = "contacto", cascade = CascadeType.ALL)
 	private List<OfertaLaboral> ofertas = new ArrayList<OfertaLaboral>();
+	
+	
+	
 
 	@OneToMany(mappedBy = "profesor", cascade = CascadeType.ALL)
 	private List<Curso> cursos = new ArrayList<Curso>();

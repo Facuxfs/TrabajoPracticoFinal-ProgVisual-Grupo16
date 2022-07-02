@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ar.edu.unju.fi.edu.entity.Ciudadano;
 import ar.edu.unju.fi.edu.entity.Empleador;
 import ar.edu.unju.fi.edu.entity.OfertaLaboral;
-import ar.edu.unju.fi.edu.repository.IEmpleadorRepository;
 import ar.edu.unju.fi.edu.repository.IOfertaLaboralRepository;
 import ar.edu.unju.fi.edu.service.IOfertaLaboralService;
 
@@ -66,5 +66,25 @@ public class OfertaLaboralServiceImp implements IOfertaLaboralService {
 		// Busca una OfertaLaboral de acuerdo a su id.
 		// En caso de no encontrar resultado, devuelve una escepcion.
 		return this.olRepository.findById(ol_id).orElseThrow(()-> new Exception("La OfertaLaboral no existe"));
+	}
+
+	@Override
+	public List<OfertaLaboral> getListaOfertaLaboralCuit(long cuit) throws Exception {
+		
+		return this.olRepository.findByContacto(cuit);
+	}
+
+	@Override
+	public List<Ciudadano> getListaCandidatos(long id) throws Exception {
+		return olRepository.findById(id).get().getPostulantes();
+	}
+
+	@Override
+	public void agregarPostulante(long id, Ciudadano ciudadano) throws Exception {
+		OfertaLaboral unaOferta = this.buscarOfertaLaboral(id);
+		List<Ciudadano> unaLista = unaOferta.getPostulantes();
+		unaLista.add(ciudadano);
+		unaOferta.setPostulantes(unaLista);
+		olRepository.save(unaOferta);
 	}
 }
