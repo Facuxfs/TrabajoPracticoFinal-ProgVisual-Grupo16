@@ -132,7 +132,7 @@ public class EmpleadorController {
 	public ModelAndView mostrarListaOfertas(@PathVariable(value = "cuit") long cuit) throws Exception {
 		ModelAndView model = new ModelAndView("lista_ofertasEmpleador");
 		model.addObject("ofertas", empleadorService.buscarEmpleador(cuit).getOfertas());
-		model.addObject("oferta", new OfertaLaboral());
+		model.addObject("cuit", cuit);
 		return model;
 	}
 	
@@ -154,13 +154,20 @@ public class EmpleadorController {
 		return mav;
 	}
 	
-	
+	@GetMapping("/verocursoss/{cuit}")
+	public ModelAndView mostrarListCursos(@PathVariable(value = "cuit") long cuit) throws Exception {
+		ModelAndView model = new ModelAndView("lista_cursosEmpleador");
+		model.addObject("cursos", empleadorService.buscarEmpleador(cuit).getCursos());
+		model.addObject("cuit", cuit);
+		return model;
+	}
 
 	@GetMapping("/verinscriptos/{c_codigo}")
 	public ModelAndView mostrarListaInscriptos(@PathVariable(value = "c_codigo") long codigo) throws Exception {
-		ModelAndView model = new ModelAndView("lista_postulantes");
+		ModelAndView model = new ModelAndView("lista_inscriptos");
 		model.addObject("postulantes", cursoService.buscarCurso(codigo).getInscriptos());
 		model.addObject("id",codigo);
+		model.addObject("cuit", cursoService.buscarCurso(codigo).getProfesor().getCuit());
 		return model;
 	}
 	

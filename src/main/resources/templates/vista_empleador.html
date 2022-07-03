@@ -32,7 +32,8 @@
   <div class="card-body">
     <h5 class="card-title">Ofertas laborales :</h5>
     <p class="card-text">Aqui podras crear las ofertas laborales que nesesite tu negocio y ver el estado de las mismas.</p>
-    <a th:href="@{/olaboral/nuevo/}+${e_cuit}" class="btn btn-primary">Crear oferta laboral</a>
+    <a th:href="@{/olaboral/nuevo/}+${empleador.cuit}" class="btn btn-success">Crear oferta laboral</a>
+    <br>
     <a th:href="@{/empleador/verofertas/}+${empleador.cuit}" class="btn btn-primary">Ver mis ofertas </a>
   </div>
 </div>
@@ -42,7 +43,9 @@
   <div class="card-body">
     <h5 class="card-title">Cursos Online :</h5>
     <p class="card-text">Aqui podras crear cursos laborales para podes capacitar gente en tu rubro.</p>
-    <a th:href="@{/nuevo/}+${e_cuit}" class="btn btn-primary">Crear un curso </a>
+    <a th:href="@{/curso/nuevo/}+${cuit}" class="btn btn-success">Crear un curso </a>
+    <br>
+      <a th:href="@{/empleador/verocursoss/}+${empleador.cuit}" class="btn btn-primary">Ver mis cursos </a>
   </div>
 </div>
 	</div>

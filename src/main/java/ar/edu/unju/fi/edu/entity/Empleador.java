@@ -87,6 +87,15 @@ public class Empleador implements Serializable{
 	@OneToMany(mappedBy = "profesor", cascade = CascadeType.ALL)
 	private List<Curso> cursos = new ArrayList<Curso>();
 	
+	
+	public List<Curso> getCursos() {
+		return cursos;
+	}
+
+	public void setCursos(List<Curso> cursos) {
+		this.cursos = cursos;
+	}
+
 	/*
 	 * Constructor no parametrizado
 	 */

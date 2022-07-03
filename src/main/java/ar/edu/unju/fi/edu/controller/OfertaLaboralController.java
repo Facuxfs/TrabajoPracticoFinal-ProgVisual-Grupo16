@@ -46,6 +46,7 @@ public class OfertaLaboralController {
 	@GetMapping("/nuevo/{e_cuit}")
 	public String getNuevaOLaboral(@PathVariable(value = "e_cuit") long e_cuit, Model model) throws Exception {
 		model.addAttribute("olaboral", this.olService.getOfertaLaboral(this.empleadorService.buscarEmpleador(e_cuit)));
+		model.addAttribute("cuit", e_cuit);
 		return "nuevo_olaboral";
 	}
 	
@@ -58,7 +59,8 @@ public class OfertaLaboralController {
 			return modelAV;
 		}
 		else{
-			ModelAndView modelAV = new ModelAndView("redirect:/olaboral/lista");
+			String cuit = String.valueOf(nuevaOL.getContacto().getCuit());
+			ModelAndView modelAV = new ModelAndView("redirect:/empleador/vistaempleador/" + cuit);
 			if(this.olService.guardarOfertaLaboral(nuevaOL)) {
 				
 			}
