@@ -2,12 +2,16 @@ package ar.edu.unju.fi.edu.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
@@ -60,6 +64,28 @@ public class Curso implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "e_cuit")
 	private Empleador profesor;
+	
+
+	
+	 @JoinTable(
+		        name = "rel_curso_cdno",
+		        joinColumns = @JoinColumn(name = "Curso", nullable = false),
+		        inverseJoinColumns = @JoinColumn(name="Inscripto", nullable = false)
+		    )
+		    @ManyToMany(cascade = CascadeType.ALL)
+	private List<Ciudadano> inscriptos ;
+	
+	 
+	 
+
+
+	public List<Ciudadano> getInscriptos() {
+		return inscriptos;
+	}
+
+	public void setInscriptos(List<Ciudadano> inscriptos) {
+		this.inscriptos = inscriptos;
+	}
 
 	/*
 	 * Constructor no parametrizado

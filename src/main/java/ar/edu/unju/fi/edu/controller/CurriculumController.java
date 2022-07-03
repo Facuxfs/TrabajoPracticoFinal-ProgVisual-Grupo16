@@ -38,18 +38,33 @@ public class CurriculumController {
 	
 	@GetMapping("/vercv/{dni}")
 	public String verCv(@PathVariable(value = "dni") int dni,Model model) {
+		if(ciudadanoService.buscarCiudadano(dni).getCv()!=null) {
 		System.out.println("este es el usuario "+dni);
 		model.addAttribute("ciudadano",ciudadanoService.buscarCiudadano(dni));
-		return "ver_curriculum";
+		
+		return "ver_curriculum";}
+		else {
+			model.addAttribute("dni", dni);
+			return "no_existe_cv";
+		}
+		
+		
+		
+	
 	}
 	
 	@GetMapping("/modificar/{dni}")
 	public String modificarCv(@PathVariable(value = "dni") int dni,Model model) {
-		System.out.println("este es el usuario "+dni);
+		if (ciudadanoService.buscarCiudadano(dni).getCv()!=null) {
 		model.addAttribute("ciudadano",ciudadanoService.buscarCiudadano(dni));
 		Curriculum cv = ciudadanoService.buscarCiudadano(dni).getCv();
 		model.addAttribute("cv", cv);
-		return "editar_curriculum";
+		model.addAttribute("dni", dni);
+		return "editar_curriculum";}
+		else {
+			model.addAttribute("dni", dni);
+			return "no_existe_cv";
+		}
 	}
 	
 	@PostMapping("/modificarcv/{dni}")

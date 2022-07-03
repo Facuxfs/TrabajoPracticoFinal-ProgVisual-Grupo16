@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unju.fi.edu.entity.Ciudadano;
 import ar.edu.unju.fi.edu.entity.Curso;
+import ar.edu.unju.fi.edu.service.ICiudadanoService;
 import ar.edu.unju.fi.edu.service.imp.CursoServiceImp;
 import ar.edu.unju.fi.edu.service.imp.EmpleadorServiceImp;
 
@@ -25,6 +27,10 @@ public class CursoController {
 	
 	@Autowired
 	private EmpleadorServiceImp empleadorService;
+	
+	@Autowired
+	private ICiudadanoService ciudadanoService;
+	
 	
 	@GetMapping("/lista")
 	public String getCursoPage(Model model) {
@@ -84,4 +90,15 @@ public class CursoController {
 		this.cursoService.modificarEstado(c_codigo);
 		return modelAV;
 	}
+	
+	@GetMapping("registrarInscripcion/{dni}/{c_codigo}")
+	public ModelAndView registrarInscripciones(@PathVariable(value = "dni") int dni, @PathVariable("c_codigo") long codigo) throws Exception {
+		String dnic = String.valueOf(ciudadanoService.buscarCiudadano(dni).getDni());
+		ModelAndView mav = new ModelAndView("redirect:/ciudadano/verocursos/" + dnic);
+		mav.addObject("oferta", cursoService.buscarCurso(codigo));
+		Ciudadano unCiudadano = ciudadanoService.buscarCiudadano(dni);
+		cursoService.agregarInscripcion(codigo, unCiudadano);
+		return mav;
+	}
+	
 }

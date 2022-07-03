@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ar.edu.unju.fi.edu.entity.Ciudadano;
 import ar.edu.unju.fi.edu.entity.Curso;
 import ar.edu.unju.fi.edu.entity.Empleador;
+import ar.edu.unju.fi.edu.entity.OfertaLaboral;
 import ar.edu.unju.fi.edu.repository.ICursoRepository;
 import ar.edu.unju.fi.edu.service.ICursoService;
 
@@ -64,5 +66,14 @@ public class CursoServiceImp implements ICursoService {
 		// Busca un Curso de acuerdo a su codigo.
 		// En cas de no encontrar resultado, devuelve una excepcion.
 		return this.cursoRepository.findByCodigo(c_codigo).orElseThrow(()-> new Exception("El Curso no existe"));
+	}
+
+	@Override
+	public void agregarInscripcion(long c_codigo, Ciudadano ciudadano) throws Exception {
+		Curso unCurso = this.buscarCurso(c_codigo);
+		List<Ciudadano> unaLista = unCurso.getInscriptos();
+		unaLista.add(ciudadano);
+		unCurso.setInscriptos(unaLista);
+		cursoRepository.save(unCurso);
 	}
 }

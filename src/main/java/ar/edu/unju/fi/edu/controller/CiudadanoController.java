@@ -21,6 +21,7 @@ import ar.edu.unju.fi.edu.entity.Curriculum;
 import ar.edu.unju.fi.edu.entity.OfertaLaboral;
 import ar.edu.unju.fi.edu.service.ICiudadanoService;
 import ar.edu.unju.fi.edu.service.ICurriculumService;
+import ar.edu.unju.fi.edu.service.ICursoService;
 import ar.edu.unju.fi.edu.service.IOfertaLaboralService;
 
 
@@ -37,6 +38,9 @@ public class CiudadanoController {
 	@Autowired
 	private IOfertaLaboralService ofertalaboralService;
 
+	@Autowired
+	private ICursoService cursoService;
+	
 	@GetMapping("/nuevo")
 	public String nuevoCiudadano(Model model) {
 		model.addAttribute("ciudadano", new Ciudadano());
@@ -78,12 +82,13 @@ public class CiudadanoController {
 	public ModelAndView EditarCiudadano(@PathVariable(value = "dni") int dni) {
 		ModelAndView model = new ModelAndView("editar_ciudadano");
 		model.addObject("ciudadano", ciudadanoService.buscarCiudadano(dni));
+		model.addObject("dni", dni);
 		return model;
 	}
 
 	@PostMapping("/modificar")
 	public ModelAndView modificarCiudadano(@Validated @ModelAttribute("ciudadano") Ciudadano ciudadano,
-			BindingResult bindingResult) throws Exception {
+			BindingResult bindingResult, Model model) throws Exception {
 	//	if (bindingResult.hasErrors()) {
 			//System.out.println("nada nada nada");
 			//ModelAndView mav = new ModelAndView("editar_ciudadano");
@@ -93,8 +98,9 @@ public class CiudadanoController {
 	//}else {
 			
 		String dnic = String.valueOf(ciudadano.getDni());
-			ModelAndView mav = new ModelAndView("redirect:/ciudadano/vistaciudadano/" + dnic);
+		ModelAndView mav = new ModelAndView("redirect:/ciudadano/vistaciudadano/" + dnic);
 		ciudadanoService.modificarCiudadano(ciudadano);
+		model.addAttribute("dni",ciudadano.getDni());
 		return mav;
 	//	}
 	}
@@ -103,12 +109,20 @@ public class CiudadanoController {
 
 	@GetMapping("/crearcv/{dni}")
 	public String CrearCv(@PathVariable(value = "dni") int dni, Model model) {
+		if(ciudadanoService.buscarCiudadano(dni).getCv()==null) {
 		model.addAttribute("ciudadano",ciudadanoService.buscarCiudadano(dni));
 		Curriculum cv = curriculumService.getCurriculum();
 		cv.setCiudadano(ciudadanoService.buscarCiudadano(dni));
 		model.addAttribute("cv", cv);
-		
+		model.addAttribute("dni", dni);
 		return "nuevo_curriculum";
+		}
+		else {
+		
+		model.addAttribute("dni", dni);
+		return "ya_existe_cv";
+		}
+		
 	}
 	
 	@GetMapping("/verofertas/{dni}")
@@ -130,5 +144,12 @@ public class CiudadanoController {
 		return model;
 	}
 	
+	@GetMapping("/verocursos/{dni}")
+	public ModelAndView mostrarListaCursos(@PathVariable(value = "dni") int dni) {
+		ModelAndView model = new ModelAndView("lista_cursosciudadano");
+		model.addObject("cursos", cursoService.getListaCurso());
+		model.addObject("dni", dni);
+		return model;
+	}
 
 }

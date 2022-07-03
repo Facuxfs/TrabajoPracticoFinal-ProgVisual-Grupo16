@@ -85,8 +85,21 @@ public class Ciudadano implements Serializable {
 	  @ManyToMany(mappedBy = "postulantes")
 	    private List<OfertaLaboral> postulaciones;
 	  
-
+	  @ManyToMany(mappedBy = "inscriptos")
+	    private List<Curso> inscripciones;
 	
+	  
+	  
+	  
+	  
+	public List<Curso> getInscripciones() {
+		return inscripciones;
+	}
+
+	public void setInscripciones(List<Curso> inscripciones) {
+		this.inscripciones = inscripciones;
+	}
+
 	public List<OfertaLaboral> getPostulaciones() {
 		return postulaciones;
 	}

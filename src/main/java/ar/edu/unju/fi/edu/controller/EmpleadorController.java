@@ -20,6 +20,7 @@ import ar.edu.unju.fi.edu.entity.Ciudadano;
 import ar.edu.unju.fi.edu.entity.Empleador;
 import ar.edu.unju.fi.edu.entity.OfertaLaboral;
 import ar.edu.unju.fi.edu.service.ICiudadanoService;
+import ar.edu.unju.fi.edu.service.ICursoService;
 import ar.edu.unju.fi.edu.service.IEmpleadorService;
 import ar.edu.unju.fi.edu.service.IOfertaLaboralService;
 
@@ -36,6 +37,8 @@ public class EmpleadorController {
 	@Autowired
 	private ICiudadanoService ciudadanoService;
 	
+	@Autowired
+	private ICursoService cursoService;
 	
 	private static final Log LOGGER = LogFactory.getLog(EmpleadorController.class);
 	
@@ -146,6 +149,16 @@ public class EmpleadorController {
 		OfertaLaboral unaOferta = ofertalaboralService.buscarOfertaLaboral(id);
 		ciudadanoService.agregarOfertaAceptada(dni, unaOferta);
 		return mav;
+	}
+	
+	
+
+	@GetMapping("/verinscriptos/{c_codigo}")
+	public ModelAndView mostrarListaInscriptos(@PathVariable(value = "c_codigo") long codigo) throws Exception {
+		ModelAndView model = new ModelAndView("lista_postulantes");
+		model.addObject("postulantes", cursoService.buscarCurso(codigo).getInscriptos());
+		model.addObject("id",codigo);
+		return model;
 	}
 	
 }
