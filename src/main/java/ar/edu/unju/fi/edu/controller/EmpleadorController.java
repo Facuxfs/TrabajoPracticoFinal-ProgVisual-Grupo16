@@ -63,7 +63,9 @@ public class EmpleadorController {
 			return modelAV;
 		}
 		else {
-			ModelAndView modelAV = new ModelAndView("redirect:/empleador/lista");
+			String cuit = String.valueOf(nuevoE.getCuit());
+			ModelAndView modelAV = new ModelAndView("redirect:/empleador/vistaempleador/" + cuit);
+			
 			
 			/*
 			if(this.empleadorService.buscarEmpleador(nuevoE.getCuit()) == null) {				
@@ -104,7 +106,8 @@ public class EmpleadorController {
 			return modelAV;
 		}
 		else {
-			ModelAndView modelAV = new ModelAndView("redirect:/empleador/lista");
+			String cuit = String.valueOf(empleadorMod.getCuit());
+			ModelAndView modelAV = new ModelAndView("redirect:/empleador/vistaempleador/" + cuit);
 			this.empleadorService.modificarEmpleador(empleadorMod);
 			return modelAV;
 		}		
