@@ -13,20 +13,22 @@
 	<body>
 	
 		<div class="container" >
+		<h2 >Tenes estos cursos disponibles :</h2>
 			<div class="row"  >
 				<!-- Cards -->
 				<div class="row">
 				<!-- CARDS -->
-				<div th:each="oferta:${ofertas}" class="col-3" >
+				<div th:each="curso:${cursos}" class="col-3" >
 					<div class="card" style="width: 300px;">
 						
 						  <div class="card-body">
-						    <h5 th:text="${oferta.cant_vacantes}" class="card-title"></h5>
-						    <h5 th:text="${oferta.puesto_req}" class="card-text"></h5>
-						    <h5 th:text="${oferta.disp_horaria}" class="card-text"> </h5>
-						<a class="btn btn-secondary btn-sm"	th:href="@{/olaboral/registrarPostulantes/{dni}/{id}
-						(id = ${oferta.id}, dni = ${dni})}" title="Registrar postulacion">
-						 Registrarme </a>
+						    <h5 th:text="${curso.titulo}" class="card-title"></h5>
+						    <h5 th:text="${curso.categoria}" class="card-text"></h5>
+						    <h5 th:text="${curso.modalidad}" class="card-text"></h5>
+						    
+						<a class="btn btn-secondary btn-sm"	th:href="@{/curso/registrarInscripcion/{dni}/{c_codigo}
+						(c_codigo = ${curso.codigo}, dni = ${dni})}" title="Registrar postulacion">
+						 Inscribirme </a>
 						  </div>
 						</div>
 						
