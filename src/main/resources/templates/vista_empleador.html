@@ -22,7 +22,7 @@
     <h3 class="card-title"  th:text="${empleador.nombre_comercial}"> </h3>
      <p class="card-title" > este es de tu comercio :</p>
     <p class="card-text">Aqui podras agregar/modificar datos del comercio o cerrar tu cesion.</p>
-    <a href="#" id="editarCiudadano" class="btn btn-success">Editar</a>
+    <a th:href="@{/empleador/editar/}+${empleador.cuit}" id="editarCiudadano" class="btn btn-success">Editar</a>
     <a href="#" class="btn btn-primary">Salir</a>
   </div>
 </div> 
@@ -31,8 +31,10 @@
   <img th:src="@{/images/iconotrabajo.jpg}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">Ofertas laborales :</h5>
-    <p class="card-text">Aqui podras ver las ofertas laborales actuales en el mercado y postularte a ellas.</p>
-    <a th:href="@{/empleador/verofertas/}+${empleador.cuit}" class="btn btn-primary">ver</a>
+    <p class="card-text">Aqui podras crear las ofertas laborales que nesesite tu negocio y ver el estado de las mismas.</p>
+    <a th:href="@{/olaboral/nuevo/}+${empleador.cuit}" class="btn btn-success">Crear oferta laboral</a>
+    <br>
+    <a th:href="@{/empleador/verofertas/}+${empleador.cuit}" class="btn btn-primary">Ver mis ofertas </a>
   </div>
 </div>
 
@@ -40,8 +42,10 @@
   <img th:src="@{/images/iconocurso.jpg}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">Cursos Online :</h5>
-    <p class="card-text">Aqui podras ver los cursos actuales en el mercado y inscribirte a ellos.</p>
-    <a href="#" class="btn btn-primary">ver </a>
+    <p class="card-text">Aqui podras crear cursos laborales para podes capacitar gente en tu rubro.</p>
+    <a th:href="@{/curso/nuevo/}+${cuit}" class="btn btn-success">Crear un curso </a>
+    <br>
+      <a th:href="@{/empleador/verocursoss/}+${empleador.cuit}" class="btn btn-primary">Ver mis cursos </a>
   </div>
 </div>
 	</div>

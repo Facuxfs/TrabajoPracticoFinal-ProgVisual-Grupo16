@@ -77,8 +77,8 @@ public class OfertaLaboral implements Serializable{
 
 	 @JoinTable(
 		        name = "rel_oferta_cdno",
-		        joinColumns = @JoinColumn(name = "Postulantes", nullable = false),
-		        inverseJoinColumns = @JoinColumn(name="Oferta", nullable = false)
+		        joinColumns = @JoinColumn(name = "Oferta", nullable = false),
+		        inverseJoinColumns = @JoinColumn(name="Postulante", nullable = false)
 		    )
 		    @ManyToMany(cascade = CascadeType.ALL)
 	private List<Ciudadano> postulantes ;

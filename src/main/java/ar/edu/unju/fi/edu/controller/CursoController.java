@@ -41,6 +41,7 @@ public class CursoController {
 	@GetMapping("/nuevo/{e_cuit}")
 	public String getNuevoCurso(@PathVariable(value = "e_cuit") long e_cuit, Model model) throws Exception {
 		model.addAttribute("curso", this.cursoService.getCurso(this.empleadorService.buscarEmpleador(e_cuit)));
+		model.addAttribute("cuit", e_cuit);
 		return "nuevo_curso";
 	}
 	
@@ -52,7 +53,8 @@ public class CursoController {
 			return modelAV;
 		}
 		else {
-			ModelAndView modelAV = new ModelAndView("redirect:/curso/lista");
+			String cuit = String.valueOf(nuevoCurso.getProfesor().getCuit());
+			ModelAndView modelAV = new ModelAndView("redirect:/empleador/vistaempleador/" + cuit);
 			if(this.cursoService.guardarCurso(nuevoCurso)) {
 				
 			}

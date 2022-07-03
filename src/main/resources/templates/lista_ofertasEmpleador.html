@@ -13,6 +13,7 @@
 	<body>
 
 	<div class="container">
+	<h2>Estas son tus ofertas laborales :</h2>
 		<div class="row">
 			<!-- Cards -->
 			<div class="row">
@@ -21,8 +22,15 @@
 					
 							<div class="card" style="width: 300px;">
 								<div class="card-body">
-									<h5 th:text="${oferta}" class="card-title"></h5>
-<a class="btn btn-secondary btn-sm"	th:href="@{/empleador/verpostulantes/{id}
+									
+									<h5 th:text=${oferta.puesto_req}> </h5>
+									<h5 th:text="${oferta.jornada}" ></h5>
+									<h5 th:text="${oferta.requisitos}" ></h5>
+									<h5 th:text="${oferta.salario}" ></h5>
+							
+									
+									
+						<a class="btn btn-secondary btn-sm"	th:href="@{/empleador/verpostulantes/{id}
 						(id = ${oferta.id})}" title="Registrar postulacion">
 						 Ver oferta :</a>
 								</div>
@@ -30,6 +38,9 @@
 
 						</div>
 					</div>
+					
+					
+					<a class="border-dark btn btn-secondary m-2" th:href="@{/empleador/vistaempleador/}+${cuit}" id="idCancelar" >Atras</a>
 				</div>
 			</div>
 	
