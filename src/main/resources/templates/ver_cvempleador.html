@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Ver tu curriculum:</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	</head>
+	
+	<body>
+		<header th:replace="/layouts/header :: header"></header>
+		
+		<input type="hidden" name="id" th:field="*{ciudadano.id}" id="id" />
+		
+		 <h2>List of products</h2>
+        
+        <div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1" th:text="${ciudadano.nombre}"> </h5>
+    </div>
+  </a>
+  <a href="#" class="list-group-item list-group-item-action">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Educacion : </h5>
+    </div>
+    <p class="mb-1" th:text="${ciudadano.cv.educacion}" ></p>
+  </a>
+  
+    <a href="#" class="list-group-item list-group-item-action">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Idiomas : </h5>
+    </div>
+    <p class="mb-1" th:text="${ciudadano.cv.idiomas}" ></p>
+  </a>
+  <a href="#" class="list-group-item list-group-item-action">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Conocimientos Informaticos : </h5>
+    </div>
+    <p class="mb-1" th:text="${ciudadano.cv.conocimientosInformaticos}" ></p>
+  </a>
+    <a href="#" class="list-group-item list-group-item-action">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">Datos Oficiales : </h5>
+    </div>
+    <p class="mb-1" th:text="${ciudadano.cv.datosOficiales}" ></p>
+  </a>
+  
+</div>
+	 <a th:href="@{/empleador/verpostulantes/}+${id}" id="cancel" class="btn btn-secondary">Atras</a>
+		<footer th:replace="/layouts/footer :: footer"></footer>
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+	
+	
+	</body>
+</html>

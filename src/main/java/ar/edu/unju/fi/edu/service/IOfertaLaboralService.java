@@ -18,4 +18,5 @@ public interface IOfertaLaboralService {
 	public List<OfertaLaboral> getListaOfertaLaboralCuit(long cuit) throws Exception;
 	public List<Ciudadano> getListaCandidatos(long id)throws Exception;
 	public void agregarPostulante (long id, Ciudadano ciudadano) throws Exception;
+	public void eliminarPostulante (long id, Ciudadano ciudadano) throws Exception;
 }

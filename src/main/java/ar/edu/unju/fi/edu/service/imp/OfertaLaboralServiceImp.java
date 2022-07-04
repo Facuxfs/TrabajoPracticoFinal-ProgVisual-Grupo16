@@ -87,4 +87,18 @@ public class OfertaLaboralServiceImp implements IOfertaLaboralService {
 		unaOferta.setPostulantes(unaLista);
 		olRepository.save(unaOferta);
 	}
+
+	@Override
+	public void eliminarPostulante(long id, Ciudadano ciudadano) throws Exception {
+		OfertaLaboral unaOferta = this.buscarOfertaLaboral(id);
+		List<Ciudadano> unaLista = unaOferta.getPostulantes();
+		for (Ciudadano cdno : unaLista) {
+			if (cdno.getDni() == ciudadano.getDni()) {
+				unaLista.remove(unaLista.indexOf(cdno));
+				break;
+			}
+		}
+		unaOferta.setPostulantes(unaLista);
+		olRepository.save(unaOferta);
+	}
 }
