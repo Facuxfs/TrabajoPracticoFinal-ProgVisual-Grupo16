@@ -25,11 +25,13 @@
 				<div class="mb-3">
 					<label for="explab" class="form-label">Experiencia laboral</label> 
 					<input th:field=*{experienciaLaboral} type="text" class="form-control" id="explab" placeholder="Escriba su experiencia laboral">
+					<div class="text-danger" th:if="${#fields.hasErrors('experienciaLaboral')}" th:errors="*{experienciaLaboral}" ></div>	
 				</div>
 				
 				<div class="mb-3">
 					<label for="explab" class="form-label">Educacion</label> 
 					<input th:field=*{educacion} type="text" class="form-control" id="explab" placeholder="Escriba su experiencia laboral">
+					<div class="text-danger" th:if="${#fields.hasErrors('educacion')}" th:errors="*{educacion}" ></div>	
 				</div>
 		
 				<div class="mb-3">
@@ -51,11 +53,13 @@
 				<div class="mb-3">
 					<label for="explab" class="form-label">Conocimientos informaticos</label> 
 					<input th:field=*{conocimientosInformaticos} type="text" class="form-control" id="explab" placeholder="Escriba su experiencia laboral">
+					<div class="text-danger" th:if="${#fields.hasErrors('conocimientosInformaticos')}" th:errors="*{conocimientosInformaticos}" ></div>
 				</div>
 				
 				<div class="mb-3">
 					<label for="explab" class="form-label">Datos Oficiales</label> 
 					<input th:field=*{datosOficiales} type="text" class="form-control" id="explab" placeholder="Escriba su experiencia laboral">
+					<div class="text-danger" th:if="${#fields.hasErrors('datosOficiales')}" th:errors="*{datosOficiales}" ></div>
 				</div>
 			</div>
 			

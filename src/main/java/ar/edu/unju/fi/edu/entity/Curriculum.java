@@ -2,7 +2,6 @@ package ar.edu.unju.fi.edu.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
-
 
 @Entity
 @Table(name = "CVs")
@@ -26,76 +24,59 @@ public class Curriculum implements Serializable{
 	@Column(name ="cur_id")
 	private Long id;
 	
-	@NotEmpty
+	//@NotEmpty(message = "El campo no puede estar vacio")
 	@Column(name = "exp_lab")
 	private String experienciaLaboral;
 	
-	@NotEmpty
+	//@NotEmpty(message = "El campo no puede estar vacio")
 	@Column(name = "edu")
 	private String educacion;
 	
-	@NotEmpty
+	//@NotEmpty(message = "El campo no puede estar vacio")
 	@Column(name = "idioma")
 	private String idiomas;
 	
-	@NotEmpty
+	//@NotEmpty(message = "El campo no puede estar vacio")
 	@Column(name = "con_inf")
 	private String conocimientosInformaticos;
 	
-	@NotEmpty
+	//@NotEmpty(message = "El campo no puede estar vacio")
 	@Column(name="datos_of")
 	private String datosOficiales;
 	
 	@Column(name = "estado")
 	private Boolean estado;
 
-	public Boolean getEstado() {
-		return estado;
-	}
-
-	public void setEstado(Boolean estado) {
-		this.estado = estado;
-	}
-
-	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ciudadano_id")
 	private Ciudadano ciudadano;
 
-	
-	
-	public Ciudadano getCiudadano() {
-		return ciudadano;
+	/*
+	 * Constructor no parametrizado
+	 */
+	public Curriculum() {
+		
 	}
-
-	public void setCiudadano(Ciudadano ciudadano) {
-		this.ciudadano = ciudadano;
-	}
-
 	
-
-
-	public Curriculum(Long id, @NotEmpty String experienciaLaboral, @NotEmpty String educacion,
-			@NotEmpty String idiomas, @NotEmpty String conocimientosInformaticos, @NotEmpty String datosOficiales,
-			Boolean estado, Ciudadano ciudadano) {
+	/*
+	 * Constructor parametrizado
+	 */
+	public Curriculum(@NotEmpty(message = "El campo no puede estar vacio") String experienciaLaboral,
+			@NotEmpty(message = "El campo no puede estar vacio") String educacion,
+			@NotEmpty(message = "El campo no puede estar vacio") String idiomas,
+			@NotEmpty(message = "El campo no puede estar vacio") String conocimientosInformaticos,
+			@NotEmpty(message = "El campo no puede estar vacio") String datosOficiales) {
 		super();
-		this.id = id;
 		this.experienciaLaboral = experienciaLaboral;
 		this.educacion = educacion;
 		this.idiomas = idiomas;
 		this.conocimientosInformaticos = conocimientosInformaticos;
 		this.datosOficiales = datosOficiales;
-		this.estado = estado;
-		this.ciudadano = ciudadano;
 	}
 
-	public Curriculum() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-
-
+	/*
+	 * Metodos accesores
+	 */
 	public Long getId() {
 		return id;
 	}
@@ -147,13 +128,27 @@ public class Curriculum implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
+	public Boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Boolean estado) {
+		this.estado = estado;
+	}
+	
+	public Ciudadano getCiudadano() {
+		return ciudadano;
+	}
+
+	public void setCiudadano(Ciudadano ciudadano) {
+		this.ciudadano = ciudadano;
+	}
 
 	@Override
 	public String toString() {
 		return "Curriculum [id=" + id + ", experienciaLaboral=" + experienciaLaboral + ", educacion=" + educacion
 				+ ", idiomas=" + idiomas + ", conocimientosInformaticos=" + conocimientosInformaticos
 				+ ", datosOficiales=" + datosOficiales + "]";
-	}
-	
-	
+	}	
 }

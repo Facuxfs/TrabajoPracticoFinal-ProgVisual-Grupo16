@@ -1,7 +1,5 @@
 package ar.edu.unju.fi.edu.controller;
 
-
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,21 +64,6 @@ public class EmpleadorController {
 			String cuit = String.valueOf(nuevoE.getCuit());
 			ModelAndView modelAV = new ModelAndView("redirect:/empleador/vistaempleador/" + cuit);
 			
-			
-			/*
-			if(this.empleadorService.buscarEmpleador(nuevoE.getCuit()) == null) {				
-				if(this.empleadorService.guardarEmpleador(nuevoE)) {
-					
-				}
-				else {
-					
-				}
-				return modelAV;
-			}
-			else {
-				return modelAV;
-			}
-			*/
 			if(this.empleadorService.guardarEmpleador(nuevoE)) {
 				
 			}
