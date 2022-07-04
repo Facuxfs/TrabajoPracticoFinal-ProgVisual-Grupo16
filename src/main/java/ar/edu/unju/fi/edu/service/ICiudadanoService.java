@@ -17,5 +17,4 @@ public interface ICiudadanoService {
 	public Ciudadano buscarCiudadano(int dni);
 	public void agregarOfertaAceptada(int dni, OfertaLaboral oferta) throws Exception;
 	public List<Ciudadano> getListaCiudadanoProvincia(String provincia);
-
 }
