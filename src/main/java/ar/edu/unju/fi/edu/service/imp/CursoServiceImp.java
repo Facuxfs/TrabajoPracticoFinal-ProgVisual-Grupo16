@@ -2,13 +2,13 @@ package ar.edu.unju.fi.edu.service.imp;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.edu.entity.Ciudadano;
 import ar.edu.unju.fi.edu.entity.Curso;
 import ar.edu.unju.fi.edu.entity.Empleador;
-import ar.edu.unju.fi.edu.entity.OfertaLaboral;
 import ar.edu.unju.fi.edu.repository.ICursoRepository;
 import ar.edu.unju.fi.edu.service.ICursoService;
 
@@ -75,5 +75,10 @@ public class CursoServiceImp implements ICursoService {
 		unaLista.add(ciudadano);
 		unCurso.setInscriptos(unaLista);
 		cursoRepository.save(unCurso);
+	}
+
+	@Override
+	public List<Curso> getListaCategoria(String categoria) {
+		return cursoRepository.findByCategoria(categoria);
 	}
 }

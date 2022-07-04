@@ -20,7 +20,7 @@
 		<form class="col-12 col-md-8 offset-md-2 mb-2 row" th:action="@{/ciudadano/buscarprovincia/{dni} (dni = ${dni})}"  th:method="POST" th:object="${empleador}">
 			
 			<div class="mb-3">
-					<label for="idProvincia" class="form-label">Provincia</label> 
+					<label for="idProvincia" class="form-label">Seleccione Provincia :</label> 
 					<select  class="form-select" aria-label="Default select example" id="idProvincia" th:field="*{provincia}">
 						<option value="Jujuy">Jujuy</option>
 						<option value="Salta">Salta</option>
@@ -50,7 +50,7 @@
 				</div>	
 			
 			<div class="text-center">
-				<button type="submit" class="border-dark btn btn-primary m-2" >Enviar</button>
+				<button type="submit" class="border-dark btn btn-primary m-2" >Filtrar</button>
 			</div>
 			
 		</form>	
