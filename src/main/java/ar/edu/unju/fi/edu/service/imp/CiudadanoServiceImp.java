@@ -77,6 +77,12 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 		ciudadanoRepository.save(unCiudadano);
 
 	}
+
+	@Override
+	public List<Ciudadano> getListaCiudadanoProvincia(String provincia) {
+		// TODO Auto-generated method stub
+		return ciudadanoRepository.findByProvincia(provincia);
+	}
 	
 	
 }

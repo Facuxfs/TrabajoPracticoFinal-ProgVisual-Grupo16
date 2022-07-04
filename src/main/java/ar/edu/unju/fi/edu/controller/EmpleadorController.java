@@ -143,9 +143,20 @@ public class EmpleadorController {
 		model.addObject("postulantes", ofertalaboralService.getListaCandidatos(id));
 		model.addObject("id",id);
 		model.addObject("cuit",cuit);
+		model.addObject("ciudadano",new Ciudadano());
 		return model;
 	}
 	
+	@PostMapping("/verpostulantesprovincia/{id}/{cuit}")
+	public ModelAndView verPostulantesProvincia(@ModelAttribute ("ciudadano")Ciudadano ciudadano,@PathVariable(value = "id") long id, @PathVariable(value = "cuit") long cuit) throws Exception {
+		ModelAndView model = new ModelAndView("lista_postulantes");
+		System.out.println(ofertalaboralService.getListaCandidatos(id));
+		model.addObject("postulantes", ciudadanoService.getListaCiudadanoProvincia(ciudadano.getProvincia()));
+		model.addObject("id",id);
+		model.addObject("cuit",cuit);
+		return model;
+	}
+
 	@GetMapping("/aceptarpostulante/{id}/{dni}")
 	public ModelAndView aceptarPostulante(@PathVariable(value="id")long id,@PathVariable(value="dni")int dni) throws Exception {
 		String idc = String.valueOf(ofertalaboralService.buscarOfertaLaboral(id).getId());
