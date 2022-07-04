@@ -12,8 +12,31 @@
 			
 	<body>
 	
+	
+	
+	
+	
+	<form class="col-12 col-md-8 offset-md-2 mb-2 row" th:action="@{/ciudadano/buscarcategoria/{dni} (dni = ${dni})}"  th:method="POST" th:object="${curso}">
+				<h2 >Tenes estos cursos disponibles :</h2>
+			<div class="mb-3">
+					<label for="idProvincia" class="form-label">Seleccione la Categoria : </label> 
+					<select  class="form-select" aria-label="Default select example" id="idProvincia" th:field="*{categoria}">
+						<option value="Inicial">Inicial</option>
+						<option value="Intermedio">Intermedio</option>
+						<option value="Avanzado">Avanzado</option>
+					</select>	
+					
+				</div>	
+			
+			<div class="text-center">
+				<button type="submit" class="border-dark btn btn-primary m-2" >Filtrar</button>
+			</div>
+			
+		</form>	
+	
+	
 		<div class="container" >
-		<h2 >Tenes estos cursos disponibles :</h2>
+	
 			<div class="row"  >
 				<!-- Cards -->
 				<div class="row">

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import ar.edu.unju.fi.edu.entity.Ciudadano;
 import ar.edu.unju.fi.edu.entity.OfertaLaboral;
 import ar.edu.unju.fi.edu.repository.CiudadanoRepository;
+import ar.edu.unju.fi.edu.repository.IOfertaLaboralRepository;
 import ar.edu.unju.fi.edu.service.ICiudadanoService;
 
 @Service
@@ -17,6 +18,10 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 	@Autowired
 	private CiudadanoRepository ciudadanoRepository;
 
+	@Autowired
+	private IOfertaLaboralRepository ofertaRepository;
+	
+	
 	@Override
 	public Ciudadano getCiudadano() {
 		// TODO Auto-generated method stub
@@ -63,10 +68,12 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 //		OfertaLaboral unaOferta = this.buscarOfertaLaboral(id);
 		List<OfertaLaboral> unaLista = unCiudadano.getPostulaciones();
 //		List<Ciudadano> unaLista = unaOferta.getPostulantes();
+		oferta.setCant_vacantes(oferta.getCant_vacantes()-1);
 		unaLista.add(oferta);
 //		unaLista.add(ciudadano);
 		unCiudadano.setPostulaciones(unaLista);
 //		unaOferta.setPostulantes(unaLista);
+		ofertaRepository.save(oferta);
 		ciudadanoRepository.save(unCiudadano);
 
 	}
