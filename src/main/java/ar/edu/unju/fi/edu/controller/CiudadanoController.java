@@ -18,10 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.edu.entity.Ciudadano;
 import ar.edu.unju.fi.edu.entity.Curriculum;
+import ar.edu.unju.fi.edu.entity.Empleador;
 import ar.edu.unju.fi.edu.entity.OfertaLaboral;
 import ar.edu.unju.fi.edu.service.ICiudadanoService;
 import ar.edu.unju.fi.edu.service.ICurriculumService;
 import ar.edu.unju.fi.edu.service.ICursoService;
+import ar.edu.unju.fi.edu.service.IEmpleadorService;
 import ar.edu.unju.fi.edu.service.IOfertaLaboralService;
 
 
@@ -40,6 +42,9 @@ public class CiudadanoController {
 
 	@Autowired
 	private ICursoService cursoService;
+	
+	@Autowired
+	private IEmpleadorService empleadorService;
 	
 	@GetMapping("/nuevo")
 	public String nuevoCiudadano(Model model) {
@@ -131,6 +136,16 @@ public class CiudadanoController {
 		model.addObject("ofertas", ofertalaboralService.getListaOfertaLaboral());
 		model.addObject("oferta", new OfertaLaboral());
 		model.addObject("dni", dni);
+		model.addObject("empleador", new Empleador());
+		return model;
+	}
+	
+	@PostMapping("/buscarprovincia/{dni}")
+	public ModelAndView mostrarOfertaProvincia(@ModelAttribute ("empleador") Empleador empleador,@PathVariable(value = "dni") int dni) {
+		ModelAndView model = new ModelAndView("lista_ofertasprovincia");
+		model.addObject("ofertas", ofertalaboralService.getListaOfertasProvincia(empleadorService.getListaEmpleadoresProvincia(empleador.getProvincia())));
+		model.addObject("dni",dni );
+		System.out.println(ofertalaboralService.getListaOfertasProvincia(empleadorService.getListaEmpleadoresProvincia(empleador.getProvincia())));
 		return model;
 	}
 	
