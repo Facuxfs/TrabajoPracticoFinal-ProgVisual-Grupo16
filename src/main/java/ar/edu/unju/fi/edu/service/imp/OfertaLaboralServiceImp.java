@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.edu.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,5 +101,16 @@ public class OfertaLaboralServiceImp implements IOfertaLaboralService {
 		}
 		unaOferta.setPostulantes(unaLista);
 		olRepository.save(unaOferta);
+	}
+
+	@Override
+	public List<OfertaLaboral> getListaOfertasProvincia(List<Empleador> empleadores) {
+		List<OfertaLaboral> unaLista = new ArrayList<>();
+		for (Empleador emp : empleadores) {
+			for (OfertaLaboral of : emp.getOfertas()) {
+				unaLista.add(of);
+			}
+		}
+		return unaLista;
 	}
 }
