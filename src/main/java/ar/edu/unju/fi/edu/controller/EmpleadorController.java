@@ -154,14 +154,9 @@ public class EmpleadorController {
 		model.addObject("postulantes", ciudadanoService.getListaCiudadanoProvincia(ciudadano.getProvincia()));
 		model.addObject("id",id);
 		model.addObject("cuit",cuit);
-	
 		return model;
 	}
-	
-	
-	
-	
-	
+
 	@GetMapping("/aceptarpostulante/{id}/{dni}")
 	public ModelAndView aceptarPostulante(@PathVariable(value="id")long id,@PathVariable(value="dni")int dni) throws Exception {
 		String idc = String.valueOf(ofertalaboralService.buscarOfertaLaboral(id).getId());
