@@ -39,19 +39,25 @@ public class EmpleadorController {
 	private ICursoService cursoService;
 	
 	private static final Log LOGGER = LogFactory.getLog(EmpleadorController.class);
-	
+	/*
+	 * metodo que retorna una lista de los objetos tipo empleador guardados en la bd
+	 */
 	@GetMapping("/lista")
 	public String getEmpleadoresPage(Model model) {
 		model.addAttribute("empleadores", this.empleadorService.getListaEmpleado());
 		return "lista_empleadores";
 	}
-	
+	/*
+	 * metodo que permite generear un nuevo objeto de tipo empleador y devuelve el formulario de registro del mismo
+	 */
 	@GetMapping("/nuevo")
 	public String getNuevoEmpleador(Model model) {
 		model.addAttribute("empleador", this.empleadorService.getEmpleador());
 		return "nuevo_empleador";
 	}
-	
+	/*
+	 * metodo que permite guardar un objeto de tipo empleador en la bd
+	 */
 	@PostMapping("/guardar")
 	public ModelAndView postGuardarNuevoEmpleador(@Validated @ModelAttribute("empleador") Empleador nuevoE, BindingResult bindingR) throws Exception {
 		
@@ -73,14 +79,18 @@ public class EmpleadorController {
 			return modelAV;
 		}
 	}
-	
+	/*
+	 * metodo que permite editas los atributos de un objeto de tipo empleador
+	 */
 	@GetMapping("/editar/{e_cuit}")
 	public ModelAndView getEditarEmpleador(@PathVariable(value = "e_cuit") long e_cuit) throws Exception {
 		ModelAndView modelAV = new ModelAndView("edicion_empleador");
 		modelAV.addObject("empleador", this.empleadorService.buscarEmpleador(e_cuit));
 		return modelAV;
 	}
-	
+	/*
+	 * metodo que guara en la bd los cambios realizados en el objeto de tipo empleador
+	 */
 	@PostMapping("modificar")
 	public ModelAndView postModificarEmpleador(@Validated @ModelAttribute("empleador") Empleador empleadorMod, BindingResult bindingR) throws Exception {
 		if(bindingR.hasErrors()) {
@@ -95,14 +105,18 @@ public class EmpleadorController {
 			return modelAV;
 		}		
 	}
-	
+	/*
+	 * metodo que permite elimiar logicamente un objeto de tipo empleador
+	 */
 	@GetMapping("/desactivarE/{e_cuit}")
 	public ModelAndView getDesactivarEmpleador(@PathVariable(value = "e_cuit") long e_cuit) throws Exception {
 		ModelAndView modelAV = new ModelAndView("redirect:/empleador/lista");
 		this.empleadorService.modificarEstado(e_cuit);
 		return modelAV;
 	}
-	
+	/*
+	 * metodo que devuleve la vista principal de un objeto de tipo empleador
+	 */
 	@GetMapping("/vistaempleador/{cuit}")
 	public ModelAndView mostrarMenuCiudadano(@PathVariable(value = "cuit") long ciut) throws Exception {
 		ModelAndView mav = new ModelAndView("vista_empleador");
@@ -110,7 +124,9 @@ public class EmpleadorController {
 		return mav;
 	}
 	
-	
+	/*
+	 * metodo que permite ver las ofertas creadas por un objeto  de tipo empleador
+	 */
 	@GetMapping("/verofertas/{cuit}")
 	public ModelAndView mostrarListaOfertas(@PathVariable(value = "cuit") long cuit) throws Exception {
 		ModelAndView model = new ModelAndView("lista_ofertasEmpleador");
@@ -118,7 +134,9 @@ public class EmpleadorController {
 		model.addObject("cuit", cuit);
 		return model;
 	}
-	
+	/*
+	 * metodo que permite ver los objetos de tipo ciudadano asociados a una oferta ed un objeto de tipo empleador
+	 */
 	@GetMapping("/verpostulantes/{id}/{cuit}")
 	public ModelAndView mostrarListaPostulantes(@PathVariable(value = "id") long id, @PathVariable(value = "cuit") long cuit) throws Exception {
 		ModelAndView model = new ModelAndView("lista_postulantes");
@@ -129,7 +147,9 @@ public class EmpleadorController {
 		model.addObject("ciudadano",new Ciudadano());
 		return model;
 	}
-	
+	/*
+	 * metodo que permite filtrar los objetos de tipo ciudadano asociados a una oferta de un empleador por su atributo provincia
+	 */
 	@PostMapping("/verpostulantesprovincia/{id}/{cuit}")
 	public ModelAndView verPostulantesProvincia(@ModelAttribute ("ciudadano")Ciudadano ciudadano,@PathVariable(value = "id") long id, @PathVariable(value = "cuit") long cuit) throws Exception {
 		ModelAndView model = new ModelAndView("lista_postulantes");
@@ -139,7 +159,9 @@ public class EmpleadorController {
 		model.addObject("cuit",cuit);
 		return model;
 	}
-
+/*
+ * metodo que permite agregar en la bd las relacion ciudadano-ofertalaboral de un empleado
+ */
 	@GetMapping("/aceptarpostulante/{id}/{dni}")
 	public ModelAndView aceptarPostulante(@PathVariable(value="id")long id,@PathVariable(value="dni")int dni) throws Exception {
 		String idc = String.valueOf(ofertalaboralService.buscarOfertaLaboral(id).getId());
@@ -149,7 +171,9 @@ public class EmpleadorController {
 		ciudadanoService.agregarOfertaAceptada(dni, unaOferta);
 		return mav;
 	}
-	
+	/*
+	 * metodo que elimina la postulacion de un obj tipo ciudadano de una oferta laboral
+	 */
 	@GetMapping("/rechazarpostulante/{id}/{dni}")
 	public ModelAndView rechazarPostulante(@PathVariable(value="id")long id,@PathVariable(value="dni")int dni) throws Exception {
 		String idc = String.valueOf(ofertalaboralService.buscarOfertaLaboral(id).getId());
@@ -159,7 +183,9 @@ public class EmpleadorController {
 	
 		return mav;
 	}
-	
+	/*
+	 * metodo que devuelve los cursos creados por un empleador
+	 */
 	
 	@GetMapping("/verocursoss/{cuit}")
 	public ModelAndView mostrarListCursos(@PathVariable(value = "cuit") long cuit) throws Exception {
@@ -168,7 +194,9 @@ public class EmpleadorController {
 		model.addObject("cuit", cuit);
 		return model;
 	}
-
+/*
+ * metodo que devuelve los objetos tipop ciudadno que se anotaron al curso 
+ */
 	@GetMapping("/verinscriptos/{c_codigo}")
 	public ModelAndView mostrarListaInscriptos(@PathVariable(value = "c_codigo") long codigo) throws Exception {
 		ModelAndView model = new ModelAndView("lista_inscriptos");

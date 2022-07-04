@@ -27,8 +27,8 @@
 						    <h5 th:text="${oferta.titulo}" ></h5>		    
 						    <h5 th:text="${oferta.categoria}" class="card-text"></h5>
 						    <h5 th:text="${oferta.modalidad}" class="card-text"> </h5>
-						<a class="btn btn-secondary btn-sm"	th:href="@{/olaboral/registrarPostulantes/{dni}/{id}
-						(id = ${oferta.codigo}, dni = ${dni})}" title="Registrar postulacion">
+						<a class="btn btn-secondary btn-sm"	th:href="@{/curso/registrarInscripcion/{dni}/{c_codigo}
+						(c_codigo = ${oferta.codigo}, dni = ${dni})}" title="Registrar postulacion">
 						 Registrarme </a>
 						  </div>
 						</div>
