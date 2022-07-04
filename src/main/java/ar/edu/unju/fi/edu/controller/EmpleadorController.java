@@ -136,7 +136,7 @@ public class EmpleadorController {
 		return model;
 	}
 	
-	@GetMapping("/verpostulantes/{cuit}/{id}")
+	@GetMapping("/verpostulantes/{id}/{cuit}")
 	public ModelAndView mostrarListaPostulantes(@PathVariable(value = "id") long id, @PathVariable(value = "cuit") long cuit) throws Exception {
 		ModelAndView model = new ModelAndView("lista_postulantes");
 		System.out.println(ofertalaboralService.getListaCandidatos(id));
@@ -149,7 +149,8 @@ public class EmpleadorController {
 	@GetMapping("/aceptarpostulante/{id}/{dni}")
 	public ModelAndView aceptarPostulante(@PathVariable(value="id")long id,@PathVariable(value="dni")int dni) throws Exception {
 		String idc = String.valueOf(ofertalaboralService.buscarOfertaLaboral(id).getId());
-		ModelAndView mav = new ModelAndView("redirect:/empleador/verpostulantes/" + idc);
+		String cuitc = String.valueOf(ofertalaboralService.buscarOfertaLaboral(id).getContacto().getCuit());
+		ModelAndView mav = new ModelAndView("redirect:/empleador/verpostulantes/" + idc +"/"+ cuitc);
 		OfertaLaboral unaOferta = ofertalaboralService.buscarOfertaLaboral(id);
 		ciudadanoService.agregarOfertaAceptada(dni, unaOferta);
 		return mav;
@@ -158,7 +159,8 @@ public class EmpleadorController {
 	@GetMapping("/rechazarpostulante/{id}/{dni}")
 	public ModelAndView rechazarPostulante(@PathVariable(value="id")long id,@PathVariable(value="dni")int dni) throws Exception {
 		String idc = String.valueOf(ofertalaboralService.buscarOfertaLaboral(id).getId());
-		ModelAndView mav = new ModelAndView("redirect:/empleador/verpostulantes/" + idc);
+		String cuitc = String.valueOf(ofertalaboralService.buscarOfertaLaboral(id).getContacto().getCuit());
+		ModelAndView mav = new ModelAndView("redirect:/empleador/verpostulantes/" + idc +"/"+ cuitc);
 		ofertalaboralService.eliminarPostulante(id, ciudadanoService.buscarCiudadano(dni));
 	
 		return mav;

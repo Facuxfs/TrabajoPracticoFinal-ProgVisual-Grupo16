@@ -64,4 +64,10 @@ public class EmpleadorServiceImp implements IEmpleadorService {
 		// En caso de no encontrar resultado, devuelve una excepcion.
 		return this.empleadorRepository.findByCuit(e_cuit).orElseThrow(()-> new Exception("El Empleador no existe"));
 	}
+
+	@Override
+	public List<Empleador> getListaEmpleadoresProvincia(String provincia) {
+		return empleadorRepository.findByProvincia(provincia);
+	}
+
 }
