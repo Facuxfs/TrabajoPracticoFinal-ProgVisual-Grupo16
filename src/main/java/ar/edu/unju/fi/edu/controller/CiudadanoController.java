@@ -1,9 +1,6 @@
 package ar.edu.unju.fi.edu.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,12 +57,19 @@ public class CiudadanoController {
 			modelAV.addObject("ciudadano", ciudadano);
 			return modelAV;
 		}else {
-		String dnic = String.valueOf(ciudadano.getDni());
-		ciudadano.setEstado(true);
-		ModelAndView mav = new ModelAndView("redirect:/ciudadano/vistaciudadano/" + dnic);
-		ciudadanoService.guardarCiudadano(ciudadano);
-		mav.addObject(ciudadano);
-		return mav;
+			if(ciudadano.getEdad() == true) {
+				String dnic = String.valueOf(ciudadano.getDni());
+				ciudadano.setEstado(true);
+				ModelAndView mav = new ModelAndView("redirect:/ciudadano/vistaciudadano/" + dnic);
+				ciudadanoService.guardarCiudadano(ciudadano);
+				mav.addObject(ciudadano);
+				return mav;
+			}
+			else {
+				ModelAndView modelAV = new ModelAndView("msg_menordeedad");
+				modelAV.addObject("ciudadano", ciudadano);
+				return modelAV;
+			}		
 		}
 	}
 

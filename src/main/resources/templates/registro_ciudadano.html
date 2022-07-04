@@ -1,120 +1,133 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="UTF-8">
-		<title>Alta Docente</title>
-		<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}">
-		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-	</head>
+<head>
+<meta charset="UTF-8">
+<title>Alta Docente</title>
+
+<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+
+<body class="container">
+	<header th:replace="/layouts/header :: header"></header>
 	
-	<body>
-		<header th:replace="/layouts/header :: header"></header>
-		<div class="container col-4">
-			<br>
-			<p class="h4">Registrate AQUI</p>
-			<br>
 	
-			<form th:action="@{/ciudadano/guardar}" method="POST" th:object="${ciudadano}">
-			
+	<section class="row bg-light py-2">
+		<h2 class="text-center">NUEVO CIUDADANO</h2>
+		<hr />
+
+		<form class="col-12 col-md-8 offset-md-2 mb-2 row" th:action="@{/ciudadano/guardar}" method="POST" th:object="${ciudadano}">
+			<div class="col-12 col-md-6">
 				<div class="mb-3">
-					<label for="dniId" class="form-label">dni</label> 
+					<label for="dniId" class="form-label">DNI</label> 
 					<input th:field=*{dni} type="number" class="form-control" id="dniId" placeholder="Ingrese su dni">
+					<div class="text-danger" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></div>
 				</div>
+				
 				<div class="mb-3">
 					<label for="nombresId" class="form-label">Nombres</label> 
 					<input th:field=*{nombre} type="text" class="form-control" id="nombresId" placeholder="Ingrese nombres">
+					<div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
 				</div>
+				
 				<div class="mb-3">
 					<label for="emailId" class="form-label">E-mail</label> 
 					<input th:field=*{email} type="email" class="form-control" id="emailId" placeholder="Ingrese e-mail">
+					<div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 				</div>
 	
-				<div class="form-group row">
-					<label for="fecha" class="col-lg-3 col-form-label form-control-label">Fecha de Nacimiento</label>
-					<div class="col-lg-9 input-group date" id="datetimepicker1" data-target-input="nearest">
-					<input type="date" class="form-control datatimepicker-input" data-target="#datetimepicker1"
-							id="fecha" placeholder="fecha" th:field="${ciudadano.fechaNacimineto}"/>
-					<div class="input-group-append" data-target="#daratimepicker1" data-toggle="datatimepicker"></div>
-					<div class="input-group-text"><i class="fa fa-calendar-alt"></i></div>
+				<div class="mb-3 form-group row">
+					<label for="idFechaI" class="form-label">Fecha de Nacimiento</label>
+					<div class="col-lg-9 input-group date" id="datetimepicker2" data-target-input="nearest" >
+						<input type="date" class="form-control datatimepicker-input" data-target="#datetimepicker2"
+								id="idFechaI" placeholder="Ingrese Fecha de Inicio" th:field="${ciudadano.fechaNacimineto}" />
+						<div class="input-group-append" data-target="#daratimepicker2" data-toggle="datatimepicker" ></div>
 					</div>
-				</div>
-
-			<div class="form-group row">
-				<label class="col-lg-3 col-form-label form-control-tabel">Estado Civil</label>
-				<div class="col-lg-9">
-					<div class="form-check">
-						<input  type="radio" name="gridRadios"
-							id="gridradios1" th:field="*{estadoCivil}" value="Soltero"
-							checked="checked" >
-							 <label  for="gridRadios1">Soltero</label>
-					</div>
-					<div class="form-check">
-						<input type="radio" name="gridRadios"
-							id="gridradios2" th:field="*{estadoCivil}" value="Casado"
-							checked="checked"> 
-							<label for="gridRadios2">Casado</label>
-					</div>
-					<div class="form-check">
-						<input  type="radio" name="gridRadios"
-							id="gridradios3" th:field="*{estadoCivil}" value="Viudo"
-							checked="checked">
-							 <label 	for="gridRadios3">Viudo</label>
-					</div>
+					<div class="text-danger" th:if="${#fields.hasErrors('fechaNacimineto')}" th:errors="*{fechaNacimineto}" ></div>					
 				</div>
 			</div>
 			
-					<div class="mb-3">
-						<label for="ProvinciasId" class="form-label">Provincia</label> 
-						<select class="form-select" aria-label="Default select example" id="idProvincia" th:field="*{provincia}">
-							<option value="Jujuy">Jujuy</option>
-							<option value="Salta">Salta</option>
-							<option value="Tucuman">Tucuman</option>
-							<option value="Formosa">Formosa</option>
-							<option value="Misiones">Misiones</option>
-							<option value="Corrientes">Corrientes</option>
-							<option value="Chaco">Chaco</option>
-							<option value="Santa Fe">Santa Fe</option>
-							<option value="Entre Rios">Entre Rios</option>
-							<option value="Santiago del Estero">Santiago del Estero</option>
-							<option value="Catamarca">Catamarca</option>
-							<option value="La Rioja">La Rioja</option>
-							<option value="San Juan">San Juan</option>
-							<option value="Cordoba">Cordoba</option>
-							<option value="San Luis">San Luis</option>
-							<option value="Mendoza">Mendoza</option>
-							<option value="La Pampa">La Pampa</option>
-							<option value="Buenos Aires">Buenos Aires</option>
-							<option value="Neuquén">Neuquén</option>
-							<option value="Río Negro">Río Negro</option>
-							<option value="Chubut">Chubut</option>
-							<option value="Santa Cruz">Santa Cruz</option>
-							<option value="Tierra del Fuego">Tierra del Fuego</option>
-						</select>
-						<div class="text-danger" th:if="${#fields.hasErrors('provincia')}" th:errors="*{provincia}" ></div>		
-					</div>	
+			<div class="col-12 col-md-6">
+				<div class="mb-3">
+					<label for="ProvinciasId" class="form-label">Provincia</label> 
+					<select class="form-select" aria-label="Default select example" id="idProvincia" th:field="*{provincia}">
+						<option value="Jujuy">Jujuy</option>
+						<option value="Salta">Salta</option>
+						<option value="Tucuman">Tucuman</option>
+						<option value="Formosa">Formosa</option>
+						<option value="Misiones">Misiones</option>
+						<option value="Corrientes">Corrientes</option>
+						<option value="Chaco">Chaco</option>
+						<option value="Santa Fe">Santa Fe</option>
+						<option value="Entre Rios">Entre Rios</option>
+						<option value="Santiago del Estero">Santiago del Estero</option>
+						<option value="Catamarca">Catamarca</option>
+						<option value="La Rioja">La Rioja</option>
+						<option value="San Juan">San Juan</option>
+						<option value="Cordoba">Cordoba</option>
+						<option value="San Luis">San Luis</option>
+						<option value="Mendoza">Mendoza</option>
+						<option value="La Pampa">La Pampa</option>
+						<option value="Buenos Aires">Buenos Aires</option>
+						<option value="Neuquén">Neuquén</option>
+						<option value="Río Negro">Río Negro</option>
+						<option value="Chubut">Chubut</option>
+						<option value="Santa Cruz">Santa Cruz</option>
+						<option value="Tierra del Fuego">Tierra del Fuego</option>
+					</select>
+					<div class="text-danger" th:if="${#fields.hasErrors('provincia')}" th:errors="*{provincia}" ></div>		
+				</div>
+				
+				<div class="mb-2 form-group row">
+					<label class="col-lg-3 form-control-tabel">Estado Civil</label>
+					<div class="col-lg-9">
+						<div class="form-check">
+							<input type="radio" name="gridRadios"
+								id="gridradios1" th:field="*{estadoCivil}" value="Soltero"
+								checked="checked" >
+								 <label for="gridRadios1">Soltero</label>
+						</div>
+						<div class="form-check">
+							<input type="radio" name="gridRadios"
+								id="gridradios2" th:field="*{estadoCivil}" value="Casado"
+								checked="checked"> 
+								<label for="gridRadios2">Casado</label>
+						</div>
+						<div class="form-check">
+							<input  type="radio" name="gridRadios"
+								id="gridradios3" th:field="*{estadoCivil}" value="Viudo"
+								checked="checked">
+								 <label 	for="gridRadios3">Viudo</label>
+						</div>
+					</div>
+				</div>
 				
 				<div class="mb-3">
 					<label for="telefonoId" class="form-label">Teléfono</label> 
 					<input th:field=*{telefono} type="number" class="form-control" id="telefonoId" placeholder="Ingrese telefono">
 					<div class="text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" ></div>
 				</div>
-				<div class="form-control">
-					<label for="telefonoId" class="form-label">Contraseña</label> 
-					<input th:field=*{contrasenia} type="password" class="form-control" id="telefonoId" placeholder="Ingrese su contraseña">
-				</div>
 				
-				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-					<button class="btn btn-primary me-md-2" type="submit">Enviar</button>
-					<a class="border-dark btn btn-secondary m-2" href="#" id="idCancelar" >Atras</a>
-	  				<!-- <button class="btn btn-secondary" type="reset">Cancelar</button> -->
+				<div class="mb-3">
+					<label for="contraseniaId" class="form-label">Contraseña</label> 
+					<input th:field=*{contrasenia} type="password" class="form-control" id="contraseniaId" placeholder="Ingrese su contraseña">
+					<div class="text-danger" th:if="${#fields.hasErrors('contrasenia')}" th:errors="*{contrasenia}" ></div>
 				</div>
-			</form>
-		</div>
-		<footer th:replace="/layouts/footer :: footer"></footer>
-		<script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
-		<script type="text/javascript" th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
-		<script type="text/javascript" th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+			</div>
+			
+			<div class="text-center">
+				<button type="submit" class="border-dark btn btn-primary m-2" >Enviar</button>
+				<a class="border-dark btn btn-secondary m-2" th:href="@{/home}" id="idCancelar" >Cancelar</a>
+			</div>		
+		</form>
+		
+		<hr />
+	</section>
+
+	<footer th:replace="/layouts/footer :: footer"></footer>
 	
-	
-	</body>
+	<script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+</body>
 </html>
