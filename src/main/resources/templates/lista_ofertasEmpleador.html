@@ -30,8 +30,8 @@
 							
 									
 									
-						<a class="btn btn-secondary btn-sm"	th:href="@{/empleador/verpostulantes/{id}
-						(id = ${oferta.id})}" title="Registrar postulacion">
+						<a class="btn btn-secondary btn-sm"	th:href="@{/empleador/verpostulantes/{cuit}/{id}
+						(id = ${oferta.id}, cuit = ${cuit})}" title="Registrar postulacion">
 						 Ver oferta :</a>
 								</div>
 							</div>

@@ -47,11 +47,22 @@ public class CurriculumController {
 			model.addAttribute("dni", dni);
 			return "no_existe_cv";
 		}
-		
-		
-		
-	
 	}
+	
+	@GetMapping("/vercvempleador/{dni}/{id}/{cuit}")
+	public String verCvEmpleador(@PathVariable(value = "dni") int dni,@PathVariable(value = "id") long id,@PathVariable(value = "cuit") long cuit,Model model) {
+		if(ciudadanoService.buscarCiudadano(dni).getCv()!=null) {
+		System.out.println("este es el usuario "+dni);
+		model.addAttribute("ciudadano",ciudadanoService.buscarCiudadano(dni));
+		model.addAttribute("id", id);
+		return "ver_cvempleador";}
+		else {
+			model.addAttribute("dni", dni);
+			model.addAttribute("cuit", cuit);
+			return "no_creo_cv";
+		}
+	}
+	
 	
 	@GetMapping("/modificar/{dni}")
 	public String modificarCv(@PathVariable(value = "dni") int dni,Model model) {
