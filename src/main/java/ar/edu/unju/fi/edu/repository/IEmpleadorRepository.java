@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.edu.repository;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,4 +19,6 @@ public interface IEmpleadorRepository extends JpaRepository<Empleador, Long> {
 	public void deleteByCuit(long e_cuit);
 	
 	public List<Empleador> findByEstado(boolean estado);
+	
+	public List<Empleador> findByProvincia(String cadena);
 }

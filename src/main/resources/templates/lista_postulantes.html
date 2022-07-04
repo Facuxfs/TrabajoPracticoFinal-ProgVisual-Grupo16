@@ -18,35 +18,34 @@
 			<div class="row">
 				<!-- CARDS -->
 				<div th:each="postulante:${postulantes}" class="col-3">
-					
-							<div class="card" style="width: 300px;">
-								<div class="card-body">
-							
-									<h5 th:text="${postulante.nombre}" class="card-title"></h5>
-									<h5 th:text="${postulante.email}" class="card-title"></h5>
-									<a class="btn btn-secondary btn-sm"	th:href="@{/curriculum/vercvempleador/{dni}/{id}/{cuit}
-					(dni = ${postulante.dni}, id = ${id}, cuit = ${cuit} )}" title="Registrar postulacion">
-						 Ver curriculum : </a>
-						
-								</div>
-								
-						 
-						 <a class="btn btn-secondary btn-sm"	th:href="@{/empleador/aceptarpostulante/{id}/{dni}
-						(id = ${id}, dni = ${postulante.dni})}" title="Registrar postulacion">
-						 Aceptar Solicitud</a>
-								<a class="btn btn-secondary btn-sm"	th:href="@{/empleador/rechazarpostulante/{id}/{dni}
-						(id = ${id},dni = ${postulante.dni})}" title="Registrar postulacion">
-						 Rechazar solicitud </a>
-							</div>
 
+					<div class="card" style="width: 300px;">
+						<div class="card-body">
+							<h5 th:text="${postulante.nombre}" class="card-title"></h5>
+							<h5 th:text="${postulante.email}" class="card-title"></h5>
+							<a class="btn btn-secondary btn-sm"
+								th:href="@{/curriculum/vercvempleador/{dni}/{id}/{cuit}
+					(dni = ${postulante.dni}, id = ${id}, cuit = ${cuit} )}"
+								title="Registrar postulacion"> Ver curriculum : </a>
 						</div>
+						<a class="btn btn-secondary btn-sm"
+							th:href="@{/empleador/aceptarpostulante/{id}/{dni} (id = ${id}, dni = ${postulante.dni})}"
+							title="Registrar postulacion"> Aceptar Solicitud</a> 
+							<a class="btn btn-secondary btn-sm"
+							th:href="@{/empleador/rechazarpostulante/{id}/{dni}	(id = ${id},dni = ${postulante.dni})}"
+							title="Registrar postulacion"> Rechazar solicitud </a>
 					</div>
-					
-					
-					 <a th:href="@{/empleador/verofertas/}+${cuit}" id="cancel" class="btn btn-secondary">Atras</a>
+
 				</div>
 			</div>
-	
+
+		<a th:href="@{/empleador/verofertas/}+${cuit}" id="cancel"
+			class="btn btn-secondary">Atras</a>
+
+		</div>
+
+	</div>
+
 
 	<script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
 		<script type="text/javascript" th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>

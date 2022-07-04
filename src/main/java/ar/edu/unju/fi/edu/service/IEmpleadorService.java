@@ -13,4 +13,5 @@ public interface IEmpleadorService {
 	public void eliminarEmpleador(long e_cuit);
 	public List<Empleador> getListaEmpleado();
 	public Empleador buscarEmpleador(long e_cuit) throws Exception;
+	public List<Empleador> getListaEmpleadoresProvincia(String provincia);
 }
