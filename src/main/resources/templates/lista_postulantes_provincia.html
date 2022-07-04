@@ -13,44 +13,6 @@
 	<body>
 <h2>Las siguientes personas se postularon a esta oferta laboral :</h2>
 
-	<form class="col-12 col-md-8 offset-md-2 mb-2 row" th:action="@{/empleador/verpostulantesprovincia/{id}/{cuit} (id = ${id}, cuit = ${cuit})}"  th:method="POST" th:object="${ciudadano}">
-			
-			<div class="mb-3">
-					<label for="idProvincia" class="form-label">Seleccione Provincia :</label> 
-					<select  class="form-select" aria-label="Default select example" id="idProvincia" th:field="*{provincia}">
-						<option value="Jujuy">Jujuy</option>
-						<option value="Salta">Salta</option>
-						<option value="Tucuman">Tucuman</option>
-						<option value="Formosa">Formosa</option>
-						<option value="Misiones">Misiones</option>
-						<option value="Corrientes">Corrientes</option>
-						<option value="Chaco">Chaco</option>
-						<option value="Santa Fe">Santa Fe</option>
-						<option value="Entre Rios">Entre Rios</option>
-						<option value="Santiago del Estero">Santiago del Estero</option>
-						<option value="Catamarca">Catamarca</option>
-						<option value="La Rioja">La Rioja</option>
-						<option value="San Juan">San Juan</option>
-						<option value="Cordoba">Cordoba</option>
-						<option value="San Luis">San Luis</option>
-						<option value="Mendoza">Mendoza</option>
-						<option value="La Pampa">La Pampa</option>
-						<option value="Buenos Aires">Buenos Aires</option>
-						<option value="Neuquén">Neuquén</option>
-						<option value="Río Negro">Río Negro</option>
-						<option value="Chubut">Chubut</option>
-						<option value="Santa Cruz">Santa Cruz</option>
-						<option value="Tierra del Fuego">Tierra del Fuego</option>
-					</select>	
-					
-				</div>	
-			
-			<div class="text-center">
-				<button type="submit" class="border-dark btn btn-primary m-2" >Filtrar</button>
-			</div>
-			
-		</form>	
-
 	<div class="container">
 		<div class="row">
 			<!-- Cards -->
