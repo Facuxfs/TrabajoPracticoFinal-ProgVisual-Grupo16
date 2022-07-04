@@ -3,6 +3,7 @@ package ar.edu.unju.fi.edu.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,22 +28,30 @@ public class CurriculumController {
 	private ICiudadanoService ciudadanoService;
 
 	@PostMapping("/guardarcv")
-	public ModelAndView guardarCv(@ModelAttribute("cv") Curriculum cv,@ModelAttribute("ciudadano") Ciudadano ciudadano) {
-		curriculumService.guardarCurriculum(cv);
-		String dnic = String.valueOf(cv.getCiudadano().getDni());
-		ModelAndView mav = new ModelAndView("redirect:/ciudadano/vistaciudadano/" + dnic);
-		mav.addObject(ciudadano);
-		
-		return mav;
+	public ModelAndView guardarCv(@ModelAttribute("cv") Curriculum cv,@ModelAttribute("ciudadano") Ciudadano ciudadano, BindingResult bindingR) {
+		if(bindingR.hasErrors()) {
+			ModelAndView modelAV = new ModelAndView("nuevo_curriculum");
+			modelAV.addObject("cv", cv);
+			modelAV.addObject("ciudadano", ciudadano);
+			return modelAV;
+		}
+		else {
+			curriculumService.guardarCurriculum(cv);
+			String dnic = String.valueOf(cv.getCiudadano().getDni());
+			ModelAndView mav = new ModelAndView("redirect:/ciudadano/vistaciudadano/" + dnic);
+			mav.addObject(ciudadano);
+			
+			return mav;
+		}		
 	}
 	
 	@GetMapping("/vercv/{dni}")
 	public String verCv(@PathVariable(value = "dni") int dni,Model model) {
 		if(ciudadanoService.buscarCiudadano(dni).getCv()!=null) {
-		System.out.println("este es el usuario "+dni);
-		model.addAttribute("ciudadano",ciudadanoService.buscarCiudadano(dni));
-		
-		return "ver_curriculum";}
+			System.out.println("este es el usuario "+dni);
+			model.addAttribute("ciudadano",ciudadanoService.buscarCiudadano(dni));
+			
+			return "ver_curriculum";}
 		else {
 			model.addAttribute("dni", dni);
 			return "no_existe_cv";
@@ -87,6 +96,4 @@ public class CurriculumController {
 		
 		return mav;
 	}
-	
-
 }
