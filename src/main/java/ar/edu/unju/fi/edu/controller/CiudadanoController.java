@@ -44,12 +44,17 @@ public class CiudadanoController {
 	@Autowired
 	private IEmpleadorService empleadorService;
 	
+	/*Metodo que genera un nuevo ciudadano y devuelve el formulario de alta
+	 * 
+	 */
 	@GetMapping("/nuevo")
 	public String nuevoCiudadano(Model model) {
 		model.addAttribute("ciudadano", new Ciudadano());
 		return "registro_ciudadano";
 	}
-
+	/*
+	 * Metodo que guarda el objeto nuevo ciudadano validado en la bd
+	 */
 	@PostMapping("/guardar")
 	public ModelAndView guardarCiudadano(@Validated @ModelAttribute("ciudadano") Ciudadano ciudadano, 
 		BindingResult bindingResult) throws Exception{
@@ -73,21 +78,27 @@ public class CiudadanoController {
 			}		
 		}
 	}
-
+	/*
+	 * metodo que devuelve un model con la lista de los ciudadanos guardados en la bd
+	 */
 	@GetMapping("/listaciudadanos")
 	public ModelAndView mostrarLista() {
 		ModelAndView mav = new ModelAndView("lista_ciudadanos");
 		mav.addObject("ciudadanos", ciudadanoService.getListaCiudadano());
 		return mav;
 	}
-
+	/*
+	 * vista principal de un usuario de tipo ciudadano
+	 */
 	@GetMapping("/vistaciudadano/{dni}")
 	public ModelAndView mostrarMenuCiudadano(@PathVariable(value = "dni") int dni) {
 		ModelAndView mav = new ModelAndView("vista_ciudadano");
 		mav.addObject("ciudadano", ciudadanoService.buscarCiudadano(dni));
 		return mav;
 	}
-
+/*
+ * permite editar los atributos del objeto tipo ciudadano
+ */
 	@GetMapping("/editar/{dni}")
 	public ModelAndView EditarCiudadano(@PathVariable(value = "dni") int dni) {
 		ModelAndView model = new ModelAndView("editar_ciudadano");
@@ -95,7 +106,9 @@ public class CiudadanoController {
 		model.addObject("dni", dni);
 		return model;
 	}
-
+/*
+ * guarda las modificaciones de los atributos de un opbjeto de tipo ciudadano
+ */
 	@PostMapping("/modificar")
 	public ModelAndView modificarCiudadano(@Validated @ModelAttribute("ciudadano") Ciudadano ciudadano,
 			BindingResult bindingResult, Model model) throws Exception {
@@ -115,7 +128,9 @@ public class CiudadanoController {
 	//	}
 	}
 	
-
+/*
+ * metodo que crea un objeto tipo curriculum asociado a un objeto de tipo ciudadano
+ */
 
 	@GetMapping("/crearcv/{dni}")
 	public String CrearCv(@PathVariable(value = "dni") int dni, Model model) {
@@ -134,7 +149,9 @@ public class CiudadanoController {
 		}
 		
 	}
-	
+	/*
+	 * metodo que muestra los objetos de tipo ofertas laborales
+	 */
 	@GetMapping("/verofertas/{dni}")
 	public ModelAndView mostrarListaOfertas(@PathVariable(value = "dni") int dni) {
 		ModelAndView model = new ModelAndView("lista_ofertasciudadano");
@@ -144,7 +161,9 @@ public class CiudadanoController {
 		model.addObject("empleador", new Empleador());
 		return model;
 	}
-	
+	/*
+	 * metodo que filtra los objetos ciudadanos de acuerdo a su atributo provincia
+	 */
 	@PostMapping("/buscarprovincia/{dni}")
 	public ModelAndView mostrarOfertaProvincia(@ModelAttribute ("empleador") Empleador empleador,@PathVariable(value = "dni") int dni) {
 		ModelAndView model = new ModelAndView("lista_ofertasprovincia");
@@ -153,7 +172,9 @@ public class CiudadanoController {
 		System.out.println(ofertalaboralService.getListaOfertasProvincia(empleadorService.getListaEmpleadoresProvincia(empleador.getProvincia())));
 		return model;
 	}
-	
+	/*
+	 * metodo que devuelve los resultados de las postulaciones de los objetos de tipo ciudadano , si fueron o no aprobadas por el objeto de tipo empleador
+	 */
 	@GetMapping("/verresultados/{dni}")
 	public ModelAndView mostrarListaResultados(@PathVariable(value = "dni") int dni) {
 		ModelAndView model = new ModelAndView("lista_resultados");
@@ -163,7 +184,9 @@ public class CiudadanoController {
 		model.addObject("dni", dni);
 		return model;
 	}
-	
+	/*
+	 * metodo que muestra los objetos de tipo curso
+	 */
 	@GetMapping("/verocursos/{dni}")
 	public ModelAndView mostrarListaCursos(@PathVariable(value = "dni") int dni) {
 		ModelAndView model = new ModelAndView("lista_cursosciudadano");
@@ -172,12 +195,15 @@ public class CiudadanoController {
 		model.addObject("curso", new Curso());
 		return model;
 	}
-
+/*
+ * metodo que devuelve los objetos tipo curso filtrados por su categoria
+ */
 	@PostMapping("/buscarcategoria/{dni}")
-	public ModelAndView mostrarOfertaProvincia(@ModelAttribute ("curso") Curso curso,@PathVariable(value = "dni") int dni) {
+	public ModelAndView mostrarOfertaProvincia(@ModelAttribute ("curso") Curso curso,@PathVariable(value = "dni") int dni) throws Exception {
 		ModelAndView model = new ModelAndView("lista_cursoscategoria");
 		model.addObject("ofertas", cursoService.getListaCategoria(curso.getCategoria()));
 		model.addObject("dni",dni );
+		model.addObject("curso", curso);
 		return model;
 	}
 	

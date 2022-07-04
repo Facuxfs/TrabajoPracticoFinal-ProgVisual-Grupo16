@@ -36,20 +36,26 @@ public class OfertaLaboralController {
 	
 	
 	private static final Log LOGGER = LogFactory.getLog(OfertaLaboralController.class);
-	
+	/*
+	 * metodo que devuelve una lista una lista de objetos de tipo oferta laboral guardados en la bd
+	 */
 	@GetMapping("/lista")
 	public String getOLaboralesPage(Model model) {
 		model.addAttribute("olaborales", this.olService.getListaOfertaLaboral());
 		return "lista_olaboral";
 	}
-	
+	/*
+	 * metodo que permite generar una nueva oferta laboral
+	 */
 	@GetMapping("/nuevo/{e_cuit}")
 	public String getNuevaOLaboral(@PathVariable(value = "e_cuit") long e_cuit, Model model) throws Exception {
 		model.addAttribute("olaboral", this.olService.getOfertaLaboral(this.empleadorService.buscarEmpleador(e_cuit)));
 		model.addAttribute("cuit", e_cuit);
 		return "nuevo_olaboral";
 	}
-	
+	/*
+	 * metodo que permite guardar en la bd un objeto de tipo oferta  laboral
+	 */
 	@PostMapping("/guardar")
 	public ModelAndView postGuardarNuevaOLaboral(@Validated @ModelAttribute("olaboral") OfertaLaboral nuevaOL, BindingResult bindingR) throws Exception {
 		if(bindingR.hasErrors()) {
