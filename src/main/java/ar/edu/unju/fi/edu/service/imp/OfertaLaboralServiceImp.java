@@ -86,6 +86,7 @@ public class OfertaLaboralServiceImp implements IOfertaLaboralService {
 		List<Ciudadano> unaLista = unaOferta.getPostulantes();
 		unaLista.add(ciudadano);
 		unaOferta.setPostulantes(unaLista);
+		
 		olRepository.save(unaOferta);
 	}
 

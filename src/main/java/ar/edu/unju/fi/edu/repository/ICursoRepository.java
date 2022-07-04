@@ -18,4 +18,6 @@ public interface ICursoRepository extends JpaRepository<Curso, Long> {
 	public void deleteByCodigo(long c_codigo);
 	
 	public List<Curso> findByEstado(boolean estado);
+	
+	public List<Curso> findByCategoria (String categoria);
 }

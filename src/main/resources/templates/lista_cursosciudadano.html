@@ -11,7 +11,29 @@
 <body class="container">
 	<header th:replace="/layouts/header :: header"></header>
 	
-	<section class="row bg-light py-2">
+
+	
+	
+	<form class="col-12 col-md-8 offset-md-2 mb-2 row" th:action="@{/ciudadano/buscarcategoria/{dni} (dni = ${dni})}"  th:method="POST" th:object="${curso}">
+				<h2 >Tenes estos cursos disponibles :</h2>
+			<div class="mb-3">
+					<label for="idProvincia" class="form-label">Seleccione la Categoria : </label> 
+					<select  class="form-select" aria-label="Default select example" id="idProvincia" th:field="*{categoria}">
+						<option value="Inicial">Inicial</option>
+						<option value="Intermedio">Intermedio</option>
+						<option value="Avanzado">Avanzado</option>
+					</select>	
+					
+				</div>	
+			
+			<div class="text-center">
+				<button type="submit" class="border-dark btn btn-primary m-2" >Filtrar</button>
+			</div>
+			
+		</form>	
+	
+	
+		<section class="row bg-light py-2">
 		<h2 class="text-center">CURSOS DISPONIBLES</h2>		
 		<hr />
 
@@ -39,12 +61,6 @@
 					<td th:text="${curso.modalidad}"></td>
 					<td th:text="${curso.profesor.cuit}"></td>				
 					<td>
-						<a class="btn btn-secondary btn-sm"	th:href="@{/curso/registrarInscripcion/{dni}/{c_codigo}
-							(c_codigo = ${curso.codigo}, dni = ${dni})}" title="Registrar postulacion">Inscribirme</a>
-					</td>
-				</tr>
-			</tbody>	
-		</table>
 
 		<div class="text-center">				
 			<a class="border-dark btn btn-secondary m-2" th:href="@{/ciudadano/vistaciudadano/}+${dni}" id="idCancelar" >Atras</a>

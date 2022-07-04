@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.edu.entity.Ciudadano;
 import ar.edu.unju.fi.edu.entity.Curriculum;
+import ar.edu.unju.fi.edu.entity.Curso;
 import ar.edu.unju.fi.edu.entity.Empleador;
 import ar.edu.unju.fi.edu.entity.OfertaLaboral;
 import ar.edu.unju.fi.edu.service.ICiudadanoService;
@@ -168,7 +169,17 @@ public class CiudadanoController {
 		ModelAndView model = new ModelAndView("lista_cursosciudadano");
 		model.addObject("cursos", cursoService.getListaCurso());
 		model.addObject("dni", dni);
+		model.addObject("curso", new Curso());
 		return model;
 	}
 
+	@PostMapping("/buscarcategoria/{dni}")
+	public ModelAndView mostrarOfertaProvincia(@ModelAttribute ("curso") Curso curso,@PathVariable(value = "dni") int dni) {
+		ModelAndView model = new ModelAndView("lista_cursoscategoria");
+		model.addObject("ofertas", cursoService.getListaCategoria(curso.getCategoria()));
+		model.addObject("dni",dni );
+		return model;
+	}
+	
+	
 }

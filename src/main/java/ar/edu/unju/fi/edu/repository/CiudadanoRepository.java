@@ -18,7 +18,7 @@ public interface CiudadanoRepository extends JpaRepository<Ciudadano, Long> {
 	public void save(Optional<Ciudadano> ciudadano);
 
 
-	
+	public List<Ciudadano> findByProvincia(String provincia);
 	
 
 }

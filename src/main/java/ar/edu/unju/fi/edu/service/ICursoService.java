@@ -16,4 +16,6 @@ public interface ICursoService {
 	public List<Curso> getListaCurso();
 	public Curso buscarCurso(long c_codigo) throws Exception;
 	public void agregarInscripcion (long c_codigo, Ciudadano ciudadano) throws Exception;
+	public List<Curso> getListaCategoria (String categoria);
+
 }
