@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,19 +21,16 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-
 @Entity
 @Table(name = "ciudadano")
 public class Ciudadano implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -71,6 +69,7 @@ public class Ciudadano implements Serializable {
 	private Long telefono;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@PastOrPresent(message = "Ingrese una fecha valida")
 	@Column(name = "fecha_nac")
 	private LocalDate fechaNacimineto;
 
@@ -82,16 +81,55 @@ public class Ciudadano implements Serializable {
 	@OneToOne(mappedBy = "ciudadano", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private Curriculum cv;
 
-	  @ManyToMany(mappedBy = "postulantes")
-	    private List<OfertaLaboral> postulaciones;
-	  
-	  @ManyToMany(mappedBy = "inscriptos")
-	    private List<Curso> inscripciones;
+	@ManyToMany(mappedBy = "postulantes")
+	private List<OfertaLaboral> postulaciones;
+  
+	@ManyToMany(mappedBy = "inscriptos")
+	private List<Curso> inscripciones;
 	
-	  
-	  
-	  
-	  
+	/*
+	 * Constructor no parametrizado
+	 */
+	public Ciudadano() {
+		
+	}
+	
+	/*
+	 * Constructor parametrizado
+	 */
+	public Ciudadano(Long id,
+			@NotEmpty @Size(min = 4, max = 20, message = "Ingrese su nombre y apellido") String nombre,
+			@Min(value = 1000000, message = "Ingrese un dni valido") int dni, Boolean estado,
+			@NotEmpty @Email String email, @NotEmpty String estadoCivil, @NotNull String provincia,
+			@Min(value = 100000000, message = "Ingrese un numero telefonico valido") Long telefono,
+			LocalDate fechaNacimineto,
+			@NotNull @Size(min = 4, max = 20, message = "La contraseña debe tener entre 4 a 20 caracteres") String contrasenia,
+			Curriculum cv) {
+		super();
+
+		this.nombre = nombre;
+		this.dni = dni;
+		this.estado = estado;
+		this.email = email;
+		this.estadoCivil = estadoCivil;
+		this.provincia = provincia;
+		this.telefono = telefono;
+		this.fechaNacimineto = fechaNacimineto;
+		this.contrasenia = contrasenia;
+		this.cv = cv;
+	}
+	
+	public boolean getEdad() {
+		LocalDate fhoy = LocalDate.now();
+		
+		Period edad = Period.between(this.fechaNacimineto, fhoy);
+		
+		return (edad.getYears() >= 18);
+	}
+	
+	/*  
+	 * Metodos accesores
+	 */
 	public List<Curso> getInscripciones() {
 		return inscripciones;
 	}
@@ -124,28 +162,6 @@ public class Ciudadano implements Serializable {
 		this.id = id;
 	}
 
-	public Ciudadano(Long id,
-			@NotEmpty @Size(min = 4, max = 20, message = "Ingrese su nombre y apellido") String nombre,
-			@Min(value = 1000000, message = "Ingrese un dni valido") int dni, Boolean estado,
-			@NotEmpty @Email String email, @NotEmpty String estadoCivil, @NotNull String provincia,
-			@Min(value = 100000000, message = "Ingrese un numero telefonico valido") Long telefono,
-			LocalDate fechaNacimineto,
-			@NotNull @Size(min = 4, max = 20, message = "La contraseña debe tener entre 4 a 20 caracteres") String contrasenia,
-			Curriculum cv) {
-		super();
-
-		this.nombre = nombre;
-		this.dni = dni;
-		this.estado = estado;
-		this.email = email;
-		this.estadoCivil = estadoCivil;
-		this.provincia = provincia;
-		this.telefono = telefono;
-		this.fechaNacimineto = fechaNacimineto;
-		this.contrasenia = contrasenia;
-		this.cv = cv;
-	}
-
 	public Boolean getEstado() {
 		return estado;
 	}
@@ -160,11 +176,6 @@ public class Ciudadano implements Serializable {
 
 	public void setDni(int dni) {
 		this.dni = dni;
-	}
-
-	public Ciudadano() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getEmail() {
@@ -233,9 +244,4 @@ public class Ciudadano implements Serializable {
 				+ ", telefono=" + telefono + ", fechaNacimineto=" + fechaNacimineto + ", contrasenia=" + contrasenia
 				+ ", cv=" + cv + "]";
 	}
-
-
-	
-	}
-
-
+}
